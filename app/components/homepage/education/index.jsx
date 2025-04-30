@@ -1,5 +1,5 @@
 // @flow strict
-import { educations } from "@/utils/data/educations";
+import { educations } from '../../../../utils/data/educations';
 import Image from "next/image";
 import { BsPersonWorkspace } from "react-icons/bs";
 import lottieFile from '../../../assets/lottie/study.json';
