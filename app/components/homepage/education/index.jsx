@@ -4,10 +4,10 @@
 import { useIsClient } from '../../helper/useIsClient';
 import { educations } from '../../../../utils/data/educations';
 import Image from "next/image";
-// import { BsPersonWorkspace } from "react-icons/bs";
+import { BsPersonWorkspace } from "react-icons/bs";
 // import lottieFile from '../../../assets/lottie/study.json';
 // import AnimationLottie from "../../helper/animation-lottie";
-// import GlowCard from "../../helper/glow-card";
+import GlowCard from "../../helper/glow-card";
 
 function Education() {
   const isClient = useIsClient();
@@ -52,38 +52,35 @@ function Education() {
           <div className="flex flex-col gap-5">
             {educations.map(
               (education) => (
-                <p key={education.id}>{education.id}</p>
+                <GlowCard
+                  key={education.id}
+                  identifier={`education-${education.id}`}
+                >
+                  <div
+                    className="p-2 relative bg-no-repeat bg-[length:100%_100%] bg-bottom"
+                    style={{ backgroundImage: "url('/blur-23.svg')" }}
+                  >
+                    <div className="flex justify-center">
+                      <p className="text-xs sm:text-sm text-[#16f2b3]">
+                        {education.duration}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-x-8 px-3 py-4">
+                      <div className="text-violet-500  transition-all duration-300 hover:scale-125">
+                        <BsPersonWorkspace size={36} />
+                      </div>
+                      <div>
+                        <p className="text-base sm:text-xl mb-2 font-medium uppercase">
+                          {education.title}
+                        </p>
+                        <p className="text-sm sm:text-base">
+                          {education.institution}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </GlowCard>
               )
-              // isClient ? (
-              //   <GlowCard
-              //     key={education.id}
-              //     identifier={`education-${education.id}`}
-              //   >
-              //     <div
-              //       className="p-2 relative bg-no-repeat bg-[length:100%_100%] bg-bottom"
-              //       style={{ backgroundImage: "url('/blur-23.svg')" }}
-              //     >
-              //       <div className="flex justify-center">
-              //         <p className="text-xs sm:text-sm text-[#16f2b3]">
-              //           {education.duration}
-              //         </p>
-              //       </div>
-              //       <div className="flex items-center gap-x-8 px-3 py-4">
-              //         <div className="text-violet-500  transition-all duration-300 hover:scale-125">
-              //           <BsPersonWorkspace size={36} />
-              //         </div>
-              //         <div>
-              //           <p className="text-base sm:text-xl mb-2 font-medium uppercase">
-              //             {education.title}
-              //           </p>
-              //           <p className="text-sm sm:text-base">
-              //             {education.institution}
-              //           </p>
-              //         </div>
-              //       </div>
-              //     </div>
-              //   </GlowCard>
-              // ) : null
             )}
           </div>
         </div>
