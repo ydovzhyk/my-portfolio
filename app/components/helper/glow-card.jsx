@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useLayoutEffect } from 'react'
 
 const GlowCard = ({ children, identifier }) => {
-  useEffect(() => {
-    
+  useLayoutEffect(() => {
+    // Перевірка, чи ми на стороні клієнта
     if (typeof window === 'undefined' || typeof document === 'undefined') return
 
     const CONTAINER = document.querySelector(`.glow-container-${identifier}`)
@@ -65,7 +65,6 @@ const GlowCard = ({ children, identifier }) => {
     }
 
     RESTYLE()
-    UPDATE()
 
     return () => {
       document.body.removeEventListener('pointermove', UPDATE)
@@ -84,4 +83,4 @@ const GlowCard = ({ children, identifier }) => {
   )
 }
 
-export default GlowCard;
+export default GlowCard
