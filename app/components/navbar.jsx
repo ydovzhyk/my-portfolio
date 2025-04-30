@@ -9,9 +9,10 @@ import logo from '../../public/logo.png'
 
 function Navbar() {
   const [activeSection, setActiveSection] = useState('');
-  console.log(activeSection)
 
   const handleScroll = useCallback((id) => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') return
+
     const element = document.getElementById(id)
     if (element) {
       const yOffset = id === 'about' ? -90 : -20
@@ -23,7 +24,7 @@ function Navbar() {
         behavior: 'smooth',
       })
     }
-  }, [])
+  }, []);
 
   return (
     <div className="fixed top-0 left-0 w-full z-[100]">
