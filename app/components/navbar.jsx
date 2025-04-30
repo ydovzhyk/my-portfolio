@@ -7,7 +7,7 @@ import Image from 'next/image'
 import logo from '../../public/logo.png'
 
 function Navbar({ activeSection }) {
-  console.log(activeSection)
+
   const handleScroll = useCallback((id) => {
     const element = document.getElementById(id)
     if (element) {
