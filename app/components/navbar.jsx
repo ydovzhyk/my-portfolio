@@ -1,14 +1,5 @@
-// @flow strict
-'use client'
-
-import { useCallback, useState } from 'react'
-import ActiveSectionObserver from '../components/helper/ActiveSectionObserver'
-import Link from 'next/link'
-import Image from 'next/image'
-import logo from '../../public/logo.png'
-
 function Navbar() {
-  const [activeSection, setActiveSection] = useState('');
+  const [activeSection, setActiveSection] = useState('')
 
   const handleScroll = useCallback((id) => {
     if (typeof window === 'undefined' || typeof document === 'undefined') return
@@ -24,7 +15,7 @@ function Navbar() {
         behavior: 'smooth',
       })
     }
-  }, []);
+  }, [])
 
   return (
     <div className="fixed top-0 left-0 w-full z-[100]">
@@ -81,6 +72,4 @@ function Navbar() {
   )
 }
 
-export default Navbar;
-
-
+export default Navbar

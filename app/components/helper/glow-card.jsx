@@ -81,4 +81,5 @@ const GlowCard = ({ children, identifier }) => {
   )
 }
 
-export default GlowCard
+export default GlowCard;
+
