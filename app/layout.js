@@ -1,6 +1,4 @@
-'use client';
-
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { GoogleTagManager } from '@next/third-parties/google'
 import { Inter } from 'next/font/google'
 import { ToastContainer } from 'react-toastify'
