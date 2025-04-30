@@ -1,10 +1,11 @@
 'use client'
 
-import { useLayoutEffect } from 'react'
+import { useEffect } from 'react';
 
 const GlowCard = ({ children, identifier }) => {
-  useLayoutEffect(() => {
-    // Перевірка, чи ми на стороні клієнта
+
+  useEffect(() => {
+
     if (typeof window === 'undefined' || typeof document === 'undefined') return
 
     const CONTAINER = document.querySelector(`.glow-container-${identifier}`)
@@ -50,21 +51,23 @@ const GlowCard = ({ children, identifier }) => {
       }
     }
 
-    document.body.addEventListener('pointermove', UPDATE)
-
     const RESTYLE = () => {
-      if (CONTAINER) {
-        CONTAINER.style.setProperty('--gap', CONFIG.gap)
-        CONTAINER.style.setProperty('--blur', CONFIG.blur)
-        CONTAINER.style.setProperty('--spread', CONFIG.spread)
-        CONTAINER.style.setProperty(
-          '--direction',
-          CONFIG.vertical ? 'column' : 'row'
-        )
-      }
+      CONTAINER?.style.setProperty('--gap', CONFIG.gap)
+      CONTAINER?.style.setProperty('--blur', CONFIG.blur)
+      CONTAINER?.style.setProperty('--spread', CONFIG.spread)
+      CONTAINER?.style.setProperty(
+        '--direction',
+        CONFIG.vertical ? 'column' : 'row'
+      )
     }
 
-    RESTYLE()
+    document.body.addEventListener('pointermove', UPDATE)
+
+    // ✅ Виклик тільки після рендеру (у requestAnimationFrame)
+    requestAnimationFrame(() => {
+      RESTYLE()
+      UPDATE()
+    })
 
     return () => {
       document.body.removeEventListener('pointermove', UPDATE)
@@ -83,4 +86,4 @@ const GlowCard = ({ children, identifier }) => {
   )
 }
 
-export default GlowCard
+export default GlowCard;
