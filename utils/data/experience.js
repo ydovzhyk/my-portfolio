@@ -1,0 +1,48 @@
+export const experiences = [
+  {
+    id: 1,
+    title: 'Full Stack Developer',
+    company: 'Siciliamia',
+    duration: 'nov 2024 - jan 2025',
+    projects: ['BlueHouse'],
+    links: ['https://bluehouse-bb.netlify.app/'],
+  },
+  {
+    id: 2,
+    title: 'Full Stack Developer',
+    company: 'Self-initiated Project',
+    duration: 'sep 2024 – present time',
+    projects: ['SpeakFlow'],
+    links: ['https://speakflow.netlify.app/'],
+  },
+  {
+    id: 3,
+    title: 'Full Stack Developer',
+    company: 'Freelance',
+    duration: 'apr 2024 - nov 2022',
+    projects: ['Art Studio Dental', 'Middle Way'],
+    links: ['https://asdental.org/', 'https://middleway.in.ua/'],
+  },
+  {
+    id: 4,
+    title: 'Self Employed',
+    company: 'Code and build something in everyday.',
+    duration: 'feb 2023 - present time',
+    projects: [
+      'Easy Shop',
+      'Notes Organizer',
+      'Slim Mom',
+      'Kapu$ta',
+      'Event Booster',
+      'Helen School',
+    ],
+    links: [
+      'https://easy-shop-team.netlify.app/',
+      'https://notes-organiser-yd.netlify.app/',
+      'https://ydovzhyk.github.io/frontend-slimmom/',
+      'https://ydovzhyk.github.io/frontend-kapusta-dev/#/login',
+      'https://ydovzhyk.github.io/eventbooster_team_project/',
+      'https://ydovzhyk.github.io/hellen_team_project/',
+    ],
+  },
+]
