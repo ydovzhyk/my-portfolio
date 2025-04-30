@@ -1,10 +1,10 @@
-'use client';
+'use client'
 
 import { useEffect } from 'react'
 
 const GlowCard = ({ children, identifier }) => {
-
   useEffect(() => {
+    
     if (typeof window === 'undefined' || typeof document === 'undefined') return
 
     const CONTAINER = document.querySelector(`.glow-container-${identifier}`)
@@ -50,27 +50,27 @@ const GlowCard = ({ children, identifier }) => {
       }
     }
 
-    const RESTYLE = () => {
-      CONTAINER?.style.setProperty('--gap', CONFIG.gap)
-      CONTAINER?.style.setProperty('--blur', CONFIG.blur)
-      CONTAINER?.style.setProperty('--spread', CONFIG.spread)
-      CONTAINER?.style.setProperty(
-        '--direction',
-        CONFIG.vertical ? 'column' : 'row'
-      )
-    }
-
     document.body.addEventListener('pointermove', UPDATE)
 
-    requestAnimationFrame(() => {
-      RESTYLE()
-      UPDATE()
-    })
+    const RESTYLE = () => {
+      if (CONTAINER) {
+        CONTAINER.style.setProperty('--gap', CONFIG.gap)
+        CONTAINER.style.setProperty('--blur', CONFIG.blur)
+        CONTAINER.style.setProperty('--spread', CONFIG.spread)
+        CONTAINER.style.setProperty(
+          '--direction',
+          CONFIG.vertical ? 'column' : 'row'
+        )
+      }
+    }
+
+    RESTYLE()
+    UPDATE()
 
     return () => {
       document.body.removeEventListener('pointermove', UPDATE)
     }
-  }, [identifier]);
+  }, [identifier])
 
   return (
     <div className={`glow-container-${identifier} glow-container`}>
