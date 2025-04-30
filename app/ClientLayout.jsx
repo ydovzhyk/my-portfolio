@@ -1,11 +1,11 @@
-'use client'
+'use client';
 
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 // import Navbar from './navbar'
-import ScrollToTop from './helper/scroll-to-top'
+import ScrollToTop from './components/helper/scroll-to-top'
 
-export default function ClientLayout({children}){
+export default function ClientLayout({ children }) {
   return (
     <>
       <ToastContainer />
