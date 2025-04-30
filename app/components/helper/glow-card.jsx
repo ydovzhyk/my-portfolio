@@ -1,12 +1,16 @@
 'use client'
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react'
 
 const GlowCard = ({ children, identifier }) => {
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
+    setIsClient(true)
+  }, [])
 
-    if (typeof window === 'undefined' || typeof document === 'undefined') return
+  useEffect(() => {
+    if (!isClient) return
 
     const CONTAINER = document.querySelector(`.glow-container-${identifier}`)
     const CARDS = document.querySelectorAll(`.glow-card-${identifier}`)
@@ -63,7 +67,6 @@ const GlowCard = ({ children, identifier }) => {
 
     document.body.addEventListener('pointermove', UPDATE)
 
-    // ✅ Виклик тільки після рендеру (у requestAnimationFrame)
     requestAnimationFrame(() => {
       RESTYLE()
       UPDATE()
@@ -72,7 +75,9 @@ const GlowCard = ({ children, identifier }) => {
     return () => {
       document.body.removeEventListener('pointermove', UPDATE)
     }
-  }, [identifier])
+  }, [identifier, isClient])
+
+  if (!isClient) return null
 
   return (
     <div className={`glow-container-${identifier} glow-container`}>
@@ -86,4 +91,4 @@ const GlowCard = ({ children, identifier }) => {
   )
 }
 
-export default GlowCard;
+export default GlowCard

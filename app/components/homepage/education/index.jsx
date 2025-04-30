@@ -1,7 +1,6 @@
 // @flow strict
 'use client';
 
-import { useIsClient } from '../../helper/useIsClient';
 import { educations } from '../../../../utils/data/educations';
 import Image from "next/image";
 import { BsPersonWorkspace } from "react-icons/bs";
@@ -10,9 +9,6 @@ import AnimationLottie from "../../helper/animation-lottie";
 import GlowCard from "../../helper/glow-card";
 
 function Education() {
-  const isClient = useIsClient()
-
-  if (!isClient) return null
 
   return (
     <section id="education" className="relative z-50 border-t my-12 lg:my-24 border-[#25213b]">

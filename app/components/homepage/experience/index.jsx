@@ -7,13 +7,8 @@ import { BsPersonWorkspace } from "react-icons/bs";
 import experience from '../../../assets/lottie/code.json';
 import AnimationLottie from "../../helper/animation-lottie";
 import GlowCard from "../../helper/glow-card";
-import { useIsClient } from '../../helper/useIsClient';
 
 function Experience() {
-  
-  const isClient = useIsClient()
-
-  if (!isClient) return null
 
   return (
     <section
