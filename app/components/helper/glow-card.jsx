@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 
 const GlowCard = ({ children, identifier }) => {
+
   useEffect(() => {
     if (typeof window === 'undefined' || typeof document === 'undefined') return
 
@@ -49,8 +50,6 @@ const GlowCard = ({ children, identifier }) => {
       }
     }
 
-    document.body.addEventListener('pointermove', UPDATE)
-
     const RESTYLE = () => {
       CONTAINER?.style.setProperty('--gap', CONFIG.gap)
       CONTAINER?.style.setProperty('--blur', CONFIG.blur)
@@ -61,13 +60,17 @@ const GlowCard = ({ children, identifier }) => {
       )
     }
 
-    RESTYLE()
-    UPDATE()
+    document.body.addEventListener('pointermove', UPDATE)
+
+    requestAnimationFrame(() => {
+      RESTYLE()
+      UPDATE()
+    })
 
     return () => {
       document.body.removeEventListener('pointermove', UPDATE)
     }
-  }, [identifier])
+  }, [identifier]);
 
   return (
     <div className={`glow-container-${identifier} glow-container`}>
