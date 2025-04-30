@@ -2,7 +2,7 @@
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Navbar from './navbar';
+import Navbar from './components/navbar';
 import ScrollToTop from './components/helper/scroll-to-top';
 
 export default function ClientLayout({ children }) {
