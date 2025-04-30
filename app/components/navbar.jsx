@@ -1,12 +1,15 @@
 // @flow strict
 'use client'
 
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
+import ActiveSectionObserver from '../components/helper/ActiveSectionObserver'
 import Link from 'next/link'
 import Image from 'next/image'
 import logo from '../../public/logo.png'
 
-function Navbar({ activeSection }) {
+function Navbar() {
+  const [activeSection, setActiveSection] = useState('');
+  console.log(activeSection)
 
   const handleScroll = useCallback((id) => {
     const element = document.getElementById(id)
@@ -24,6 +27,7 @@ function Navbar({ activeSection }) {
 
   return (
     <div className="fixed top-0 left-0 w-full z-[100]">
+      <ActiveSectionObserver setActiveSection={setActiveSection} />
       <div className="mx-auto lg:max-w-[70rem] xl:max-w-[76rem] 2xl:max-w-[92rem] px-6 sm:px-12">
         <nav className="backdrop-blur-md bg-opacity-50">
           <div className="flex items-center justify-between py-5">
@@ -37,7 +41,6 @@ function Navbar({ activeSection }) {
                 />
               </Link>
             </div>
-
             <ul
               className="mt-4 flex h-screen max-h-0 w-full flex-col items-start text-sm opacity-0 md:mt-0 md:h-auto md:max-h-screen md:w-auto md:flex-row md:space-x-1 md:border-0 md:opacity-100 gap-11"
               id="navbar-default"
