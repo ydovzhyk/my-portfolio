@@ -52,7 +52,7 @@ function Education() {
           <div className="flex flex-col gap-5">
             {educations.map(
               (education) => (
-                <p>{education.id}</p>
+                <p key={education.id}>{education.id}</p>
               )
               // isClient ? (
               //   <GlowCard
