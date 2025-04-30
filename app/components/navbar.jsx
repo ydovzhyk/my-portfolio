@@ -1,3 +1,11 @@
+// @flow strict
+'use client'
+
+import { useCallback, useState } from 'react'
+import ActiveSectionObserver from '../components/helper/ActiveSectionObserver'
+import Link from 'next/link'
+import Image from 'next/image'
+import logo from '../../public/logo.png'
 function Navbar() {
   const [activeSection, setActiveSection] = useState('')
 
