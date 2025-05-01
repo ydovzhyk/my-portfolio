@@ -11,7 +11,7 @@ export const experiences = [
     id: 2,
     title: 'Full Stack Developer',
     company: 'Self-initiated Project',
-    duration: 'sep 2024 – present time',
+    duration: 'sep 2024 – present',
     projects: ['SpeakFlow'],
     links: ['https://speakflow.netlify.app/'],
   },
@@ -27,7 +27,7 @@ export const experiences = [
     id: 4,
     title: 'Self Employed',
     company: 'Code and build something in everyday.',
-    duration: 'feb 2023 - present time',
+    duration: 'feb 2023 - present',
     projects: [
       'Easy Shop',
       'Notes Organizer',
