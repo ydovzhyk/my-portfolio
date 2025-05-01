@@ -210,8 +210,8 @@ Whenever you push changes to your GitHub repo, Vercel will automatically redeplo
 4. Once 2-Step Verification is enabled, you'll see an option for **App Passwords**.
 5. Click on **App Passwords**. You may need to enter your Google account password again.
 6. In the **Select app** dropdown, choose "Mail", and for **Select device**, choose "Other (Custom name)" and name it appropriately (e.g., "Portfolio").
-[text](https://myaccount.google.com/apppasswords)
 7. Click **Generate**. A 16-character app password will be displayed. Save this password for later use in your environment variables (e.g., `GMAIL_PASSKEY`).
+[text](https://myaccount.google.com/apppasswords)
 
 ## Create a Telegram Bot
 
