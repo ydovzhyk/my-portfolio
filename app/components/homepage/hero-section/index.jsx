@@ -109,9 +109,9 @@ function HeroSection() {
 
               <div>
                 <span className="ml-4 lg:ml-8 mr-2 text-white">name:</span>
-                <span className="text-gray-400">'</span>
+                <span className="text-gray-400">&#39;</span>
                 <span className="text-orange-200">Yuriy Dovzhyk</span>
-                <span className="text-gray-400">',</span>
+                <span className="text-gray-400">&#39;,</span>
               </div>
 
               <div className="ml-4 lg:ml-8 mr-2">
@@ -135,7 +135,7 @@ function HeroSection() {
                   'REST API',
                 ].map((skill, i, arr) => (
                   <React.Fragment key={i}>
-                    <span className="text-orange-200">'{skill}'</span>
+                    <span className="text-orange-200">&#39;{skill}&#39;</span>
                     {i < arr.length - 1 && (
                       <span className="text-gray-400">, </span>
                     )}
@@ -146,7 +146,9 @@ function HeroSection() {
               </div>
 
               <div>
-                <span className="ml-4 lg:ml-8 mr-2 text-white">hardWorker:</span>
+                <span className="ml-4 lg:ml-8 mr-2 text-white">
+                  hardWorker:
+                </span>
                 <span className="text-orange-400">true</span>
                 <span className="text-gray-400">,</span>
               </div>

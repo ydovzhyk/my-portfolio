@@ -28,16 +28,16 @@ function ProjectCard({ project }) {
           </div>
           <div>
             <span className="ml-4 lg:ml-8 mr-2 text-white">name:</span>
-            <span className="text-gray-400">'</span>
+            <span className="text-gray-400">&#39;</span>
             <span className="text-orange-200">{project.name}</span>
-            <span className="text-gray-400">',</span>
+            <span className="text-gray-400">&#39;,</span>
           </div>
           <div className="ml-4 lg:ml-8 mr-2">
             <span className="text-white">tools</span>:
             <span className="text-gray-400">{' ['}</span>
             {project.tools.map((tag, i) => (
               <React.Fragment key={i}>
-                <span className="text-orange-200">'{tag}'</span>
+                <span className="text-orange-200">&#39;{tag}&#39;</span>
                 {project.tools.length - 1 !== i && (
                   <span className="text-gray-400">, </span>
                 )}
@@ -48,12 +48,12 @@ function ProjectCard({ project }) {
           </div>
           <div>
             <span className="ml-4 lg:ml-8 mr-2 text-white">myRole:</span>
-            <span className="text-orange-400">'{project.role}'</span>
+            <span className="text-orange-400">&#39;{project.role}&#39;</span>
             <span className="text-gray-400">,</span>
           </div>
           <div className="ml-4 lg:ml-8 mr-2">
             <span className="text-white">description:</span>
-            <span className="text-cyan-400"> '{project.description}'</span>
+            <span className="text-cyan-400"> &#39;{project.description}&#39;</span>
             <span className="text-gray-400">,</span>
           </div>
           {project.frontendGitLink && (
@@ -108,7 +108,3 @@ function ProjectCard({ project }) {
 }
 
 export default ProjectCard;
-
-
-
-
