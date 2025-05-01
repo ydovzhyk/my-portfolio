@@ -13,7 +13,6 @@
 - 🛠️ SKILLS
 - 📁 PROJECTS
 - 🎓 EDUCATION
-- 📝 BLOG
 - 📬 CONTACTS
 
 ---
