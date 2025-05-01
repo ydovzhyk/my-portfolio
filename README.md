@@ -1,23 +1,7 @@
-<p align="center" width="100%">
-    <img height="100" src="https://github.com/ydovzhyk/my-portfolio/blob/main/app/assets/main.png">
-</p>
-
 # Developer Portfolio
-
-## Table of Contents :scroll:
-
-- [Sections](#sections-bookmark)
-- [Installation](#installation-arrow_down)
-- [Getting Started](#getting-started-dart)
-- [Usage](#usage-joystick)
-- [Deployment](#deployment-rocket)
-- [Tutorials](#tutorials-wrench)
-  - [Gmail App Password Setup](#gmail-app-password-setup)
-  - [Create a Telegram Bot](#create-a-telegram-bot)
-- [Packages Used](#packages-used-package)
-
----
-
+<p align="center" width="100%">
+    <img height="500" src="https://github.com/ydovzhyk/my-portfolio/blob/main/app/assets/main.png">
+</p>
 # Sections :bookmark:
 
 - HERO SECTION
