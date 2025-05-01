@@ -33,7 +33,7 @@ function Experience() {
       </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
           <div className="flex justify-center items-center">
-              <AnimationLottie animationPath={experience} />
+              {/* <AnimationLottie animationPath={experience} /> */}
           </div>
             <div className="flex flex-col gap-5">
               {experiences.map((experience) => (
