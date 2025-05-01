@@ -42,9 +42,9 @@ function Education() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
         <div className="flex justify-center items-start">
-          <div className="w-3/4 h-3/4">
+          {/* <div className="w-3/4 h-3/4">
             {isClient ? <AnimationLottie animationPath={lottieFile} /> : null}
-          </div>
+          </div> */}
         </div>
 
         <div className="flex flex-row items-center justify-center">
