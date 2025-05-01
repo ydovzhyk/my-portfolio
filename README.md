@@ -1,6 +1,6 @@
 # Developer Portfolio
 <p align="center" width="100%">
-    <img height="500" src="https://github.com/ydovzhyk/my-portfolio/blob/main/app/assets/main.png">
+    <img height="450" src="https://github.com/ydovzhyk/my-portfolio/blob/main/app/assets/main.png">
 </p>
 # Sections :bookmark:
 
