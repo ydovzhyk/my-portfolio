@@ -29,6 +29,7 @@ export const experiences = [
     company: 'Code and build something in everyday.',
     duration: 'feb 2023 - present',
     projects: [
+      'Booking Apartment',
       'Easy Shop',
       'Notes Organizer',
       'Slim Mom',
@@ -37,6 +38,7 @@ export const experiences = [
       'Helen School',
     ],
     links: [
+      'https://bookingapart.netlify.app/',
       'https://easy-shop-team.netlify.app/',
       'https://notes-organiser-yd.netlify.app/',
       'https://ydovzhyk.github.io/frontend-slimmom/',
