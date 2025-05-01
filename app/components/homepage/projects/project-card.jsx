@@ -27,14 +27,14 @@ function ProjectCard({ project }) {
             <span className="text-gray-400">{'{'}</span>
           </div>
           <div>
-            <span className="ml-4 lg:ml-8 mr-2 text-white">'name'</span>:
-            <span className="text-gray-400"> '</span>
+            <span className="ml-4 lg:ml-8 mr-2 text-white">name:</span>
+            <span className="text-gray-400">'</span>
             <span className="text-orange-200">{project.name}</span>
             <span className="text-gray-400">',</span>
           </div>
           <div className="ml-4 lg:ml-8 mr-2">
-            <span className=" text-white">'tools'</span>:
-            <span className="text-gray-400"> [</span>
+            <span className="text-white">tools</span>:
+            <span className="text-gray-400">{' ['}</span>
             {project.tools.map((tag, i) => (
               <React.Fragment key={i}>
                 <span className="text-orange-200">'{tag}'</span>
@@ -43,21 +43,22 @@ function ProjectCard({ project }) {
                 )}
               </React.Fragment>
             ))}
-            <span className="text-gray-400">],</span>
+            <span className="text-gray-400">{']'}</span>
+            <span className="text-gray-400">,</span>
           </div>
           <div>
-            <span className="ml-4 lg:ml-8 mr-2 text-white">'myRole'</span>:
-            <span className="text-orange-400"> '{project.role}'</span>
+            <span className="ml-4 lg:ml-8 mr-2 text-white">myRole:</span>
+            <span className="text-orange-400">'{project.role}'</span>
             <span className="text-gray-400">,</span>
           </div>
           <div className="ml-4 lg:ml-8 mr-2">
-            <span className="text-white">'description'</span>:
+            <span className="text-white">description:</span>
             <span className="text-cyan-400"> '{project.description}'</span>
             <span className="text-gray-400">,</span>
           </div>
           {project.frontendGitLink && (
             <div className="ml-4 lg:ml-8 mr-2">
-              <span className="text-white">'frontendCode'</span>:&nbsp;
+              <span className="text-white">frontendCode</span>:&nbsp;
               <a
                 href={project.frontendGitLink}
                 target="_blank"
@@ -71,7 +72,7 @@ function ProjectCard({ project }) {
           )}
           {project.backendGitLink && (
             <div className="ml-4 lg:ml-8 mr-2">
-              <span className="text-white">'backend-code'</span>:&nbsp;
+              <span className="text-white">backendCode</span>:&nbsp;
               <a
                 href={project.backendGitLink}
                 target="_blank"
@@ -85,7 +86,7 @@ function ProjectCard({ project }) {
           )}
           {project.demo && (
             <div className="ml-4 lg:ml-8 mr-2">
-              <span className="text-white">'preview'</span>:&nbsp;
+              <span className="text-white">preview</span>:&nbsp;
               <a
                 href={project.demo}
                 target="_blank"
@@ -107,6 +108,7 @@ function ProjectCard({ project }) {
 }
 
 export default ProjectCard;
+
 
 
 

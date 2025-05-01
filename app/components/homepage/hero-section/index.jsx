@@ -1,6 +1,7 @@
 // @flow strict
 
 /* eslint-disable react/no-unescaped-entities */
+import React from 'react'
 import { personalData } from '../../../../utils/data/personal-data';
 import Image from "next/image";
 import Link from "next/link";
@@ -105,62 +106,51 @@ function HeroSection() {
                 <span className="mr-2 text-pink-500">=</span>
                 <span className="text-gray-400">{'{'}</span>
               </div>
+
               <div>
                 <span className="ml-4 lg:ml-8 mr-2 text-white">name:</span>
                 <span className="text-gray-400">'</span>
                 <span className="text-orange-200">Yuriy Dovzhyk</span>
                 <span className="text-gray-400">',</span>
               </div>
+
               <div className="ml-4 lg:ml-8 mr-2">
                 <span className="text-white">skills:</span>
-                <span className="text-gray-400">{` [`}</span>
-                <span className="text-orange-200">HTML5</span>
-                <span className="text-gray-400">{"', '"}</span>
-                <span className="text-orange-200">CSS3</span>
-                <span className="text-gray-400">{"', '"}</span>
-                <span className="text-orange-200">SASS</span>
-                <span className="text-gray-400">{"', '"}</span>
-                <span className="text-orange-200">Tailwind CSS</span>
-                <span className="text-gray-400">{"', '"}</span>
-                <span className="text-orange-200">JavaScript</span>
-                <span className="text-gray-400">{"', '"}</span>
-                <span className="text-orange-200">TypeScript</span>
-                <span className="text-gray-400">{"', '"}</span>
-                <span className="text-orange-200">React</span>
-                <span className="text-gray-400">{"', '"}</span>
-                <span className="text-orange-200">Redux Toolkit</span>
-                <span className="text-gray-400">{"', '"}</span>
-                <span className="text-orange-200">Next.js</span>
-                <span className="text-gray-400">{"', '"}</span>
-                <span className="text-orange-200">Vue.js</span>
-                <span className="text-gray-400">{"', '"}</span>
-                <span className="text-orange-200">Node.js</span>
-                <span className="text-gray-400">{"', '"}</span>
-                <span className="text-orange-200">Express.js</span>
-                <span className="text-gray-400">{"', '"}</span>
-                <span className="text-orange-200">MongoDB</span>
-                <span className="text-gray-400">{"', '"}</span>
-                <span className="text-orange-200">Firebase</span>
-                <span className="text-gray-400">{"', '"}</span>
-                <span className="text-orange-200">REST API</span>
-                {/* <span className="text-gray-400">{"', '"}</span>
-                <span className="text-orange-200">GitHub</span>
-                <span className="text-gray-400">{"', '"}</span>
-                <span className="text-orange-200">Google APIs</span>
-                <span className="text-gray-400">{"', '"}</span>
-                <span className="text-orange-200">OpenAI GPT-4</span>
-                <span className="text-gray-400">{"', '"}</span>
-                <span className="text-orange-200">React Native (basic)</span> */}
-                <span className="text-gray-400">{"'"}</span>
-                <span className="text-gray-400">{`]`},</span>
+                <span className="text-gray-400">{' ['}</span>
+                {[
+                  'HTML5',
+                  'CSS3',
+                  'SASS',
+                  'Tailwind CSS',
+                  'JavaScript',
+                  'TypeScript',
+                  'React',
+                  'Redux Toolkit',
+                  'Next.js',
+                  'Vue.js',
+                  'Node.js',
+                  'Express.js',
+                  'MongoDB',
+                  'Firebase',
+                  'REST API',
+                ].map((skill, i, arr) => (
+                  <React.Fragment key={i}>
+                    <span className="text-orange-200">'{skill}'</span>
+                    {i < arr.length - 1 && (
+                      <span className="text-gray-400">, </span>
+                    )}
+                  </React.Fragment>
+                ))}
+                <span className="text-gray-400">{']'}</span>
+                <span className="text-gray-400">,</span>
               </div>
+
               <div>
-                <span className="ml-4 lg:ml-8 mr-2 text-white">
-                  hardWorker:
-                </span>
+                <span className="ml-4 lg:ml-8 mr-2 text-white">hardWorker:</span>
                 <span className="text-orange-400">true</span>
                 <span className="text-gray-400">,</span>
               </div>
+
               <div>
                 <span className="ml-4 lg:ml-8 mr-2 text-white">
                   quickLearner:
@@ -168,6 +158,7 @@ function HeroSection() {
                 <span className="text-orange-400">true</span>
                 <span className="text-gray-400">,</span>
               </div>
+
               <div>
                 <span className="ml-4 lg:ml-8 mr-2 text-white">
                   problemSolver:
@@ -175,6 +166,7 @@ function HeroSection() {
                 <span className="text-orange-400">true</span>
                 <span className="text-gray-400">,</span>
               </div>
+
               <div>
                 <span className="ml-4 lg:ml-8 mr-2 text-green-400">
                   hireable:
@@ -182,36 +174,45 @@ function HeroSection() {
                 <span className="text-orange-400">function</span>
                 <span className="text-gray-400">{`() {`}</span>
               </div>
+
               <div>
                 <span className="ml-8 lg:ml-16 mr-2 text-orange-400">
                   return
                 </span>
                 <span className="text-gray-400">{`(`}</span>
               </div>
+
               <div>
                 <span className="ml-12 lg:ml-24 text-cyan-400">this.</span>
                 <span className="mr-2 text-white">hardWorker</span>
-                <span className="text-orange-200">&amp;&amp;</span>
+                <span className="text-orange-200">&&</span>
               </div>
+
               <div>
                 <span className="ml-12 lg:ml-24 text-cyan-400">this.</span>
                 <span className="mr-2 text-white">problemSolver</span>
-                <span className="text-orange-200">&amp;&amp;</span>
+                <span className="text-orange-200">&&</span>
               </div>
+
               <div>
                 <span className="ml-12 lg:ml-24 text-cyan-400">this.</span>
                 <span className="mr-2 text-white">skills.length</span>
                 <span className="mr-2 text-orange-200">&gt;=</span>
                 <span className="text-orange-400">5</span>
               </div>
+
               <div>
-                <span className="ml-8 lg:ml-16 text-gray-400">{`);`}</span>
+                <span className="ml-8 lg:ml-16 text-gray-400">{`)`}</span>
+                <span className="text-gray-400">;</span>
               </div>
+
               <div>
-                <span className="ml-4 lg:ml-8 text-gray-400">{`};`}</span>
+                <span className="ml-4 lg:ml-8 text-gray-400">{'}'}</span>
+                <span className="text-gray-400">,</span>
               </div>
+
               <div>
-                <span className="text-gray-400">{`};`}</span>
+                <span className="text-gray-400">{'};'}</span>
               </div>
             </code>
           </div>
