@@ -5,12 +5,16 @@ import { educations } from '../../../../utils/data/educations';
 import { useIsClient } from '../../helper/useIsClient';
 import Image from "next/image";
 import { BsPersonWorkspace } from "react-icons/bs";
-// import lottieFile from '../../../assets/lottie/study.json';
+import lottieFile from '../../../assets/lottie/study.json';
+import dynamic from 'next/dynamic';
+const AnimationLottie = dynamic(() => import('../../helper/animation-lottie'), {
+  ssr: false,
+})
 // import AnimationLottie from "../../helper/animation-lottie";
 import GlowCard from "../../helper/glow-card";
 
 function Education() {
-  const isClient = useIsClient();
+  // const isClient = useIsClient();
 
   return (
     <section
@@ -43,7 +47,7 @@ function Education() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
         <div className="flex justify-center items-start">
           <div className="w-3/4 h-3/4">
-            {/* {isClient ? <AnimationLottie animationPath={lottieFile} /> : null} */}
+            <AnimationLottie animationPath={lottieFile} />
           </div>
         </div>
 
