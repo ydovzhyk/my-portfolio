@@ -83,6 +83,7 @@ export const personalData = {
 3. Go to **App Passwords**
 4. Choose app: "Mail", device: "Other", name it (e.g., "Portfolio")
 5. Generate password → save as `GMAIL_PASSKEY`
+6. Go directly to [apppasswords](https://myaccount.google.com/apppasswords)
 
 ### 🤖 Create a Telegram Bot
 
@@ -145,9 +146,5 @@ This project is based on the [original repository by Abu Said](https://github.co
 
 > Minor component changes were made for personal customization.
 > All credits and appreciation go to the original author.
-```
 
-</details>
-
----
 
