@@ -3,7 +3,6 @@
 import { personalData } from '../../../../utils/data/personal-data';
 import Image from "next/image";
 
-
 function AboutSection() {
   return (
     <section id="about" className="my-12 lg:my-16 relative">
@@ -38,5 +37,4 @@ function AboutSection() {
     </section>
   )
 };
-
 export default AboutSection;

@@ -11,7 +11,31 @@ export const metadata = {
   title: 'Portfolio of Yuriy Dovzhyk - Full Stack Developer',
   description:
     'Portfolio of Yuriy Dovzhyk – Full Stack Developer specializing in React, Next.js, Node.js, and MongoDB. Building scalable web applications and APIs.',
+  openGraph: {
+    title: 'Yuriy Dovzhyk – Full Stack Developer Portfolio',
+    description:
+      'Explore projects, skills, and experience in web development with React, Next.js, Node.js, and more.',
+    url: 'https://ydovzhyk.com',
+    siteName: 'Yuriy Dovzhyk Portfolio',
+    images: [
+      {
+        url: 'https://ydovzhyk.com/og-image.png',
+        width: 556,
+        height: 591,
+        alt: 'Preview of Yuriy Dovzhyk portfolio website',
+      },
+    ],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Yuriy Dovzhyk – Full Stack Developer Portfolio',
+    description:
+      'Explore projects, skills, and experience in web development with React, Next.js, Node.js, and more.',
+    images: ['https://ydovzhyk.com/og-image.jpg'],
+  },
 }
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">

@@ -85,14 +85,6 @@ function HeroSection() {
             </Link>
           </div>
           <div className="flex items-center gap-5">
-            {/* <Link
-              href="#contact"
-              className="group bg-gradient-to-r from-violet-600 to-pink-500 p-[1px] rounded-full transition-all duration-300 hover:from-pink-500 hover:to-violet-600"
-            >
-              <button className="flex items-center gap-1 hover:gap-3 px-3 md:px-8 py-3 md:py-4 rounded-full border-none text-xs md:text-sm font-medium uppercase tracking-wider transition-all duration-200 ease-out md:font-semibold bg-[#0d1224] text-white group-hover:bg-transparent group-hover:text-white w-full">
-                <span>Contact me</span>
-              </button>
-            </Link> */}
             <div
               onClick={() => handleScroll('contact')}
               className="cursor-pointer group bg-gradient-to-r from-violet-600 to-pink-500 p-[1px] rounded-full transition-all duration-300 hover:from-pink-500 hover:to-violet-600"
@@ -125,7 +117,7 @@ function HeroSection() {
             </div>
           </div>
           <div className="overflow-hidden border-t-[2px] border-indigo-900 px-4 lg:px-6 py-4 lg:py-6">
-            <code className="font-mono text-xs md:text-sm lg:text-base">
+            <code className="font-mono text-sm md:text-sm lg:text-base">
               <div className="blink">
                 <span className="mr-2 text-pink-500">const</span>
                 <span className="mr-2 text-white">coder</span>
