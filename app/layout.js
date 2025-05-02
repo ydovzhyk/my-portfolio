@@ -32,7 +32,7 @@ export const metadata = {
     title: 'Yuriy Dovzhyk – Full Stack Developer Portfolio',
     description:
       'Explore projects, skills, and experience in web development with React, Next.js, Node.js, and more.',
-    images: ['https://ydovzhyk.com/og-image.jpg'],
+    images: ['https://ydovzhyk.com/og-image.png'],
   },
 }
 
