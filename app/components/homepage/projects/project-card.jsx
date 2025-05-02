@@ -22,7 +22,7 @@ function ProjectCard({ project }) {
           <span className="hidden lg:block">{project.name}</span>
         </p>
       </div>
-      <div className="overflow-hidden border-t-[2px] border-indigo-900 px-4 lg:px-8 py-4 lg:py-8 h-[550px] lg:h-[440px] flex flex-col justify-start">
+      <div className="overflow-hidden border-t-[2px] border-indigo-900 px-4 lg:px-8 py-4 lg:py-8 h-[540px] lg:h-[440px] flex flex-col justify-start">
         <code className="font-mono text-sm md:text-sm lg:text-base">
           <div className="blink">
             <span className="mr-2 text-pink-500">const</span>
