@@ -14,7 +14,7 @@ function Navbar() {
 
     const element = document.getElementById(id)
     if (element) {
-      const yOffset = id === 'about' ? -90 : -20
+      const yOffset = id === 'about' ? -90 : 'projects' ? -90 : -20
       const y =
         element.getBoundingClientRect().top + window.pageYOffset + yOffset
 
