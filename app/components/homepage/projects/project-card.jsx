@@ -1,5 +1,8 @@
 // @flow strict
-import * as React from 'react'
+'use client';
+
+import * as React from 'react';
+import { toast } from 'react-toastify';
 
 function ProjectCard({ project }) {
   return (
@@ -15,7 +18,8 @@ function ProjectCard({ project }) {
           <div className="h-2 w-2 lg:h-3 lg:w-3 rounded-full bg-green-200"></div>
         </div>
         <p className="text-center ml-3 text-[#16f2b3] text-base lg:text-xl">
-          {project.name}
+          <span className="block lg:hidden">{project.shotName}</span>
+          <span className="hidden lg:block">{project.name}</span>
         </p>
       </div>
       <div className="overflow-hidden border-t-[2px] border-indigo-900 px-4 lg:px-8 py-4 lg:py-8 h-[440px] flex flex-col justify-start">
@@ -53,7 +57,10 @@ function ProjectCard({ project }) {
           </div>
           <div className="ml-4 lg:ml-8 mr-2">
             <span className="text-white">description:</span>
-            <span className="text-cyan-400"> &#39;{project.description}&#39;</span>
+            <span className="text-cyan-400">
+              {' '}
+              &#39;{project.description}&#39;
+            </span>
             <span className="text-gray-400">,</span>
           </div>
           {project.frontendGitLink && (
@@ -84,7 +91,7 @@ function ProjectCard({ project }) {
               <span className="text-gray-400">,</span>
             </div>
           )}
-          {project.demo && (
+          {/* {project.demo && (
             <div className="ml-4 lg:ml-8 mr-2">
               <span className="text-white">preview</span>:&nbsp;
               <a
@@ -95,6 +102,29 @@ function ProjectCard({ project }) {
               >
                 link
               </a>
+              <span className="text-gray-400">,</span>
+            </div>
+          )} */}
+          {project.demo && (
+            <div className="ml-4 lg:ml-8 mr-2">
+              <span className="text-white">preview</span>:&nbsp;
+              <button
+                onClick={() => {
+                  const isDesktop = window.innerWidth >= 1024
+
+                  if (!project.ready && !isDesktop) {
+                    toast.info(
+                      'This project is only available on desktop or laptop devices.'
+                    )
+                    return
+                  }
+
+                  window.open(project.demo, '_blank')
+                }}
+                className="text-blue-400 no-underline hover:underline cursor-pointer"
+              >
+                link
+              </button>
               <span className="text-gray-400">,</span>
             </div>
           )}
