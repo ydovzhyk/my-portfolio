@@ -37,13 +37,15 @@ const ScrollToTop = () => {
 
   return (
     <button
-      className={`${DEFAULT_BTN_CLS} ${isVisible ? 'block' : 'hidden'}`}
+      className={`${DEFAULT_BTN_CLS} ${isVisible ? 'block' : 'hidden'} group`}
       onClick={scrollToTop}
     >
       <div className={`triangle ${isVisible ? 'animate-blink' : ''}`}></div>
-      YD
+      <span className="transition-all duration-200 group-hover:font-bold">
+        YD
+      </span>
     </button>
   )
 }
 
-export default ScrollToTop
+export default ScrollToTop;

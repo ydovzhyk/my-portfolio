@@ -1,7 +1,8 @@
 // @flow strict
+'use client';
 
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react'
+import React, { useCallback } from 'react';
 import { personalData } from '../../../../utils/data/personal-data';
 import Image from "next/image";
 import Link from "next/link";
@@ -11,6 +12,23 @@ import { IoLogoGithub, IoMdCall } from 'react-icons/io';
 import { MdAlternateEmail } from 'react-icons/md';
 
 function HeroSection() {
+
+  const handleScroll = useCallback((id) => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') return
+
+    const element = document.getElementById(id)
+    if (element) {
+      const yOffset = -80
+      const y =
+        element.getBoundingClientRect().top + window.pageYOffset + yOffset
+
+      window.scrollTo({
+        top: y,
+        behavior: 'smooth',
+      })
+    }
+  }, []);
+
   return (
     <section
       id="hero"
@@ -67,14 +85,22 @@ function HeroSection() {
             </Link>
           </div>
           <div className="flex items-center gap-5">
-            <Link
+            {/* <Link
               href="#contact"
               className="group bg-gradient-to-r from-violet-600 to-pink-500 p-[1px] rounded-full transition-all duration-300 hover:from-pink-500 hover:to-violet-600"
             >
               <button className="flex items-center gap-1 hover:gap-3 px-3 md:px-8 py-3 md:py-4 rounded-full border-none text-xs md:text-sm font-medium uppercase tracking-wider transition-all duration-200 ease-out md:font-semibold bg-[#0d1224] text-white group-hover:bg-transparent group-hover:text-white w-full">
                 <span>Contact me</span>
               </button>
-            </Link>
+            </Link> */}
+            <div
+              onClick={() => handleScroll('contact')}
+              className="cursor-pointer group bg-gradient-to-r from-violet-600 to-pink-500 p-[1px] rounded-full transition-all duration-300 hover:from-pink-500 hover:to-violet-600"
+            >
+              <button className="flex items-center gap-1 hover:gap-3 px-3 md:px-8 py-3 md:py-4 rounded-full border-none text-xs md:text-sm font-medium uppercase tracking-wider transition-all duration-200 ease-out md:font-semibold bg-[#0d1224] text-white group-hover:bg-transparent group-hover:text-white w-full">
+                <span>Contact me</span>
+              </button>
+            </div>
             <Link
               href={personalData.resume}
               target="_blank"

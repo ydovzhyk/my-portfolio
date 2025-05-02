@@ -38,7 +38,6 @@ export const experiences = [
       'Slim Mom',
       'Kapu$ta',
       'Event Booster',
-      'Helen School',
     ],
     links: [
       'https://bookingapart.netlify.app/',
@@ -47,7 +46,6 @@ export const experiences = [
       'https://ydovzhyk.github.io/frontend-slimmom/',
       'https://ydovzhyk.github.io/frontend-kapusta-dev/#/login',
       'https://ydovzhyk.github.io/eventbooster_team_project/',
-      'https://ydovzhyk.github.io/hellen_team_project/',
     ],
     notReady: ['Booking Apartment'],
   },

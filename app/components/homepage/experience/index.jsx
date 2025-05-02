@@ -1,5 +1,5 @@
 // @flow strict
-'use client'
+'use client';
 
 import dynamic from 'next/dynamic';
 import { experiences } from '../../../../utils/data/experience';
@@ -13,15 +13,17 @@ import GlowCard from '../../helper/glow-card';
 import { toast } from 'react-toastify';
 
 function Experience() {
-  const handleProjectClick = (e, isNotReady) => {
+  const handleProjectClick = (e, projectName, notReadyList) => {
     const isDesktop = window.innerWidth >= 1024
+    const isNotReady = notReadyList.includes(projectName)
+
     if (isNotReady && !isDesktop) {
       e.preventDefault()
       toast.info(
         'This project is only available on desktop devices at the moment.'
       )
     }
-  }
+  };
 
   return (
     <section
@@ -76,7 +78,7 @@ function Experience() {
                     <p className="text-sm sm:text-lg mb-1 font-medium uppercase">
                       {experience.title}
                     </p>
-                    <p className="text-xs sm:text-sm text-gray-300">
+                    <p className="text-sm sm:text-base text-gray-300">
                       {experience.company}
                     </p>
                   </div>
@@ -84,15 +86,13 @@ function Experience() {
 
                 {/* Projects */}
                 <div className="px-2 py-2">
-                  <div className="flex flex-wrap text-xs sm:text-sm items-center">
+                  <div className="flex flex-wrap text-sm sm:text-base items-center">
                     <span className="text-white font-semibold mr-2">
                       {experience.projects.length > 1
                         ? 'Projects:'
                         : 'Project:'}
                     </span>
                     {experience.projects.map((project, index) => {
-                      const isNotReady = experience.notReady.includes(project)
-
                       return (
                         <span key={index} className="flex items-center">
                           <a
@@ -100,14 +100,18 @@ function Experience() {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) =>
-                              handleProjectClick(e, isNotReady)
+                              handleProjectClick(
+                                e,
+                                project,
+                                experience.notReady
+                              )
                             }
                             className="text-cyan-400 hover:underline hover:text-cyan-300 transition-all duration-300"
                           >
                             {project}
                           </a>
                           {index !== experience.projects.length - 1 && (
-                            <span>,&nbsp;</span>
+                            <span>, &nbsp;</span>
                           )}
                         </span>
                       )
