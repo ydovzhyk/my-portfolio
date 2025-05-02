@@ -8,7 +8,13 @@ export default function ActiveSectionObserver({ setActiveSection }) {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveSection(entry.target.id)
+            const id = entry.target.id
+
+            if (id.startsWith('sticky-card-')) {
+              setActiveSection('projects')
+            } else {
+              setActiveSection(id)
+            }
           }
         })
       },
@@ -18,7 +24,9 @@ export default function ActiveSectionObserver({ setActiveSection }) {
       }
     )
 
-    const sections = document.querySelectorAll('section[id]')
+    const sections = document.querySelectorAll(
+      'section[id], div[id^="sticky-card-"]'
+    )
     sections.forEach((section) => observer.observe(section))
 
     return () => {
