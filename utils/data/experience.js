@@ -6,6 +6,7 @@ export const experiences = [
     duration: 'nov 2024 - jan 2025',
     projects: ['BlueHouse'],
     links: ['https://bluehouse-bb.netlify.app/'],
+    notReady: [''],
   },
   {
     id: 2,
@@ -14,6 +15,7 @@ export const experiences = [
     duration: 'sep 2024 – present',
     projects: ['SpeakFlow'],
     links: ['https://speakflow.netlify.app/'],
+    notReady: [''],
   },
   {
     id: 3,
@@ -22,6 +24,7 @@ export const experiences = [
     duration: 'apr 2024 - nov 2022',
     projects: ['Art Studio Dental', 'Middle Way'],
     links: ['https://asdental.org/', 'https://middleway.in.ua/'],
+    notReady: [''],
   },
   {
     id: 4,
@@ -46,5 +49,6 @@ export const experiences = [
       'https://ydovzhyk.github.io/eventbooster_team_project/',
       'https://ydovzhyk.github.io/hellen_team_project/',
     ],
+    notReady: ['Booking Apartment'],
   },
 ]
