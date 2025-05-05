@@ -1,12 +1,12 @@
 // @flow strict
 'use client'
 
-import { useCallback, useState } from 'react'
-import ActiveSectionObserver from '../components/helper/ActiveSectionObserver'
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
+import { useCallback, useState } from 'react'
 import logo from '../../public/logo.png'
-function Navbar() {
+import ActiveSectionObserver from './helper/ActiveSectionObserver'
+function Header() {
   const [activeSection, setActiveSection] = useState('')
 
   const handleScroll = useCallback((id) => {
@@ -26,7 +26,7 @@ function Navbar() {
   }, [])
 
   return (
-    <div className="fixed top-0 left-0 w-full z-[100]">
+    <header className="fixed top-0 left-0 w-full z-[100]">
       <ActiveSectionObserver setActiveSection={setActiveSection} />
       <div className="mx-auto lg:max-w-[70rem] xl:max-w-[76rem] 2xl:max-w-[92rem] px-6 sm:px-12">
         <nav className="backdrop-blur-md bg-opacity-50">
@@ -76,8 +76,8 @@ function Navbar() {
           </div>
         </nav>
       </div>
-    </div>
+    </header>
   )
 }
 
-export default Navbar
+export default Header
