@@ -21,7 +21,7 @@ export const experiences = [
     id: 3,
     title: 'Full Stack Developer',
     company: 'Freelance',
-    duration: 'apr 2024 - nov 2022',
+    duration: 'apr 2024 - nov 2024',
     projects: ['Art Studio Dental', 'Middle Way'],
     links: ['https://asdental.org/', 'https://middleway.in.ua/'],
     notReady: [''],
