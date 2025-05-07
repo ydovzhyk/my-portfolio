@@ -20,5 +20,5 @@ If you're looking for someone who takes ownership, thinks critically, and codes 
   leetcode: '',
   devUsername: 'ydovzhyk',
   resume:
-    'https://drive.google.com/file/d/1_t-icP8Yb5UD72aKxeV-1UHvqC-ZlC4C/view?usp=sharing',
+    'https://drive.google.com/file/d/15EN2cDg3XFn-YbDVu8igzru0lxsA3W_A/view?usp=sharing',
 }
