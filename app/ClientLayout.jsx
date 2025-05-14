@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/header';
 import ScrollToTop from './components/helper/scroll-to-top';
+import ChatWidget from './components/сhat-widget/ChatWidget';
 
 export default function ClientLayout({ children }) {
   return (
@@ -13,6 +14,7 @@ export default function ClientLayout({ children }) {
         <Header />
         {children}
         <ScrollToTop />
+        <ChatWidget />
       </main>
     </>
   )

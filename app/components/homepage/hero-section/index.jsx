@@ -151,6 +151,7 @@ function HeroSection() {
                   'MongoDB',
                   'Firebase',
                   'REST API',
+                  'OpenAI API',
                 ].map((skill, i, arr) => (
                   <React.Fragment key={i}>
                     <span className="text-orange-200">&#39;{skill}&#39;</span>

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 
 const DEFAULT_BTN_CLS =
-  'fixed bottom-8 right-6 z-50 flex items-center rounded-full bg-gradient-to-r from-pink-500 to-violet-600 p-4'
+  'fixed bottom-8 right-6 z-60 flex items-center rounded-full bg-gradient-to-r from-pink-500 to-violet-600 p-4'
 const SCROLL_THRESHOLD = 150
 
 const ScrollToTop = () => {
