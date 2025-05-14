@@ -7,7 +7,7 @@
 //   key: inputData.key,
 // };
 
-// const storageSecret = '8d2e1fae-4319-4c6e-9d7f-5f1394a3b876';
+// const storageSecret = process.env.ZAPIER_STORAGE_SECRET;
 
 // const fetchUrl = `https://store.zapier.com/api/records?secret=${storageSecret}&key=${storeKey}`;
 // const updateUrl = `https://store.zapier.com/api/records?secret=${storageSecret}`;
@@ -64,7 +64,7 @@
   //   key: inputData.key,
   // }
 
-  // const storageSecret = '8d2e1fae-4319-4c6e-9d7f-5f1394a3b876'
+  // const storageSecret = process.env.ZAPIER_STORAGE_SECRET;
   // const fetchUrl = `https://store.zapier.com/api/records?secret=${storageSecret}&key=${storeKey}`
   // const updateUrl = `https://store.zapier.com/api/records?secret=${storageSecret}`
 
