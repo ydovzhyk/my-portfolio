@@ -1,10 +1,12 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import ReactMarkdown from 'react-markdown'
 import Image from 'next/image'
-import { FiMessageCircle, FiX } from 'react-icons/fi'
+import { useEffect, useRef, useState } from 'react'
+import { FiX } from 'react-icons/fi'
 import { PiBroomLight } from 'react-icons/pi'
+import { TiMessages } from 'react-icons/ti'
+import ReactMarkdown from 'react-markdown'
+import { greetings } from '../../../utils/data/greetings'
 
 const ThinkingDots = () => {
   return (
@@ -98,12 +100,31 @@ const ChatWidget = () => {
       minute: '2-digit',
     })
 
-    const toggleChat = () => {
-      if (isOpen) {
-        sendChatToTelegram()
+  // const toggleChat = () => {
+  //   if (isOpen) {
+  //     sendChatToTelegram()
+  //   }
+  //   setIsOpen((prev) => !prev)
+  // }
+
+  const toggleChat = () => {
+    if (isOpen) {
+      sendChatToTelegram()
+    } else {
+      if (chat.length === 0) {
+        const greeting = greetings[Math.floor(Math.random() * greetings.length)]
+        const now = new Date()
+        setChat([
+          {
+            role: 'assistant',
+            text: greeting,
+            timestamp: now,
+          },
+        ])
       }
-      setIsOpen((prev) => !prev)
     }
+    setIsOpen((prev) => !prev)
+  }
 
   const sendMessage = async () => {
     if (!message.trim()) return
@@ -192,9 +213,13 @@ const ChatWidget = () => {
     <>
       <button
         onClick={toggleChat}
-        className="fixed bottom-32 right-6 z-60 flex items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-violet-600 p-4 text-white shadow-xl hover:brightness-110 transition"
+        className={`fixed bottom-32 right-6 z-60 flex items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-violet-600 p-4 text-white shadow-xl hover:brightness-110 transition ${
+          isOpen ? 'animate-none' : 'animate-pulseCustom'
+        }`}
       >
-        {isOpen ? <FiX size={24} /> : <FiMessageCircle size={24} />}
+        <div className={`relative ${!isOpen ? 'animate-shakeCustom' : ''}`}>
+          {isOpen ? <FiX size={24} /> : <TiMessages size={24} />}
+        </div>
       </button>
 
       {isOpen && (
@@ -232,7 +257,7 @@ const ChatWidget = () => {
                 }`}
               >
                 <div
-                  className={`max-w-[85%] p-2 rounded-md whitespace-pre-wrap overflow-hidden break-words ${
+                  className={`max-w-[85%] p-2 rounded-md overflow-hidden break-words ${
                     msg.role === 'user'
                       ? 'bg-pink-600 text-white'
                       : 'bg-[#221A4A] text-gray-200'
@@ -305,7 +330,7 @@ const ChatWidget = () => {
   )
 }
 
-export default ChatWidget;
+export default ChatWidget
 
 // ChatWidjet with Zapier
 // 'use client'
