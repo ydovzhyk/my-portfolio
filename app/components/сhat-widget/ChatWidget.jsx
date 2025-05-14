@@ -90,7 +90,7 @@ const ChatWidget = () => {
         }
       }, 0)
     }
-  }, [isOpen])
+  }, [isOpen, chat.length])
 
   const formatTime = (timestamp) =>
     new Date(timestamp).toLocaleTimeString([], {
@@ -191,7 +191,7 @@ const ChatWidget = () => {
                 height={38}
                 className="rounded-full"
               />
-              <p className="text-m text-gray-400">I'm here to help!</p>
+              <p className="text-m text-gray-400">I&apos;m here to help!</p>
             </div>
             <div className="flex flex-row items-center gap-3 mb-4 rounded-xl border border-neutral-700 px-4 py-3 shadow-xl">
               <button
