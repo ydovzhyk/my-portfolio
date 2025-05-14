@@ -98,7 +98,12 @@ const ChatWidget = () => {
       minute: '2-digit',
     })
 
-  const toggleChat = () => setIsOpen((prev) => !prev)
+    const toggleChat = () => {
+      if (isOpen) {
+        sendChatToTelegram()
+      }
+      setIsOpen((prev) => !prev)
+    }
 
   const sendMessage = async () => {
     if (!message.trim()) return
@@ -171,6 +176,18 @@ const ChatWidget = () => {
     localStorage.removeItem('chat_history')
   }
 
+  const sendChatToTelegram = async () => {
+    try {
+      await fetch('/api/send-chat-history', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId }),
+      })
+    } catch (err) {
+      console.error('Telegram send failed:', err.message)
+    }
+  }
+
   return (
     <>
       <button
@@ -225,7 +242,19 @@ const ChatWidget = () => {
                     <ThinkingDots />
                   ) : (
                     <div className="prose prose-invert text-sm font-extralight">
-                      <ReactMarkdown>{msg.text}</ReactMarkdown>
+                      <ReactMarkdown
+                        components={{
+                          a: ({ node, ...props }) => (
+                            <a
+                              {...props}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            />
+                          ),
+                        }}
+                      >
+                        {msg.text}
+                      </ReactMarkdown>
                     </div>
                   )}
                 </div>
