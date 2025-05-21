@@ -28,7 +28,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "app/api/firebase/route.js", "app/api/send-chat-history/route.js", "app/api/avatar/route.js"  ],
   "exclude": [
     "node_modules"
   ]
