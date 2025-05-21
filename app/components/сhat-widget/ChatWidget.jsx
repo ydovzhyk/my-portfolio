@@ -261,7 +261,7 @@ const ChatWidget = () => {
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-[100px] left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:right-24 z-50 w-[90%] sm:w-[320px] rounded-xl border border-neutral-700 p-4 shadow-xl text-white bg-gradient-to-r from-[#0d1224] to-[#0a0d37]">
+        <div className="fixed bottom-[110px] sm:bottom-8 left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:right-24 z-50 w-[90%] sm:w-[320px] rounded-xl border border-neutral-700 p-4 shadow-xl text-white bg-gradient-to-r from-[#0d1224] to-[#0a0d37]">
           <div className="flex flex-row justify-between items-center gap-2">
             <div className="flex  flex-row items-center gap-3 w-[80%] mb-4 rounded-xl border border-neutral-700 pl-[10px] pr-[10px] py-1 shadow-xl">
               <Image
