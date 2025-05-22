@@ -497,7 +497,7 @@ const ChatWidget = () => {
             )}
           </div> */}
 
-          <div className="h-[420px] sm:h-[50vh] flex flex-col">
+          <div className="h-[390px] sm:h-[50vh] flex flex-col">
             <div
               ref={chatContainerRef}
               className="flex flex-col flex-1 overflow-y-auto pr-3 text-sm mb-2 space-y-3 custom-scroll"
