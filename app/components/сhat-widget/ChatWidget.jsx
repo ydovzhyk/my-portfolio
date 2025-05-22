@@ -385,7 +385,7 @@ const ChatWidget = () => {
     <>
       <button
         onClick={toggleChat}
-        className={`fixed bottom-35 sm:bottom-32 right-6 z-60 flex items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-violet-600 p-4 text-white shadow-xl hover:brightness-110 transition ${
+        className={`fixed bottom-[140px] sm:bottom-32 right-6 z-60 flex items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-violet-600 p-4 text-white shadow-xl hover:brightness-110 transition ${
           isOpen ? 'animate-none' : 'animate-pulseCustom'
         }`}
       >
