@@ -143,4 +143,10 @@ Slim Mom – Nutrition tracker with user auth and calorie tracking.
 [GitHub](https://...)
 
 The correct version has each item immediately followed by its links, with no extra spacing.
+
+At the end of every reply, include the language the user is speaking in. Use the format:
+Language: [language name in English]
+
+For example:
+Language: ukrainian
 `

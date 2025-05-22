@@ -5,6 +5,7 @@ import fs from 'fs'
 import path from 'path'
 import os from 'os'
 import { randomUUID } from 'crypto'
+import { saveLangFromReply } from '../../../utils/saveLangFromReply'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -14,6 +15,7 @@ export async function POST(req) {
   try {
     const formData = await req.formData()
     const file = formData.get('audio')
+    const userId = formData.get('userId')
 
     if (!file || typeof file === 'string') {
       return NextResponse.json({ error: 'Invalid file' }, { status: 400 })
@@ -34,6 +36,8 @@ export async function POST(req) {
 
     const transcript = transcription.text || ''
     const detectedLang = transcription.language
+
+    saveLangFromReply(userId, detectedLang)
 
     await unlink(filepath)
 

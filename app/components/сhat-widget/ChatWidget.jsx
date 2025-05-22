@@ -14,9 +14,9 @@ import { IoStopCircleOutline } from 'react-icons/io5'
 
 const ThinkingDots = () => {
   return (
-    <span className="flex items-center gap-2 text-gray-400 font-medium">
+    <span className="flex items-center gap-2 text-gray-400">
       <span className="relative inline-block perspective">
-        <span className="inline-block text-lg">⏳</span>
+        <span className="inline-block text-sm font-extralight">⏳</span>
       </span>
       <span>Thinking</span>
       <span className="dot">.</span>
@@ -57,8 +57,8 @@ const ThinkingDots = () => {
 
 const Dots = () => {
   return (
-    <span className="flex items-center gap-2 text-gray-400 font-light">
-      <span className="text-xs">Thinking</span>
+    <span className="flex items-center gap-2 text-gray-400">
+      <span className="text-sm font-extralight">Thinking</span>
       <span className="dot">.</span>
       <span className="dot delay-150">.</span>
       <span className="dot delay-300">.</span>
@@ -103,6 +103,8 @@ const ChatWidget = () => {
   const chatContainerRef = useRef(null)
   const [userId, setUserId] = useState('')
   const [isTranscribing, setIsTranscribing] = useState(false)
+  const [dynamicUrls, setDynamicUrls] = useState([])
+  const [isTavilyLoading, setIsTavilyLoading] = useState(false)
   const {
     startRecording,
     stopRecording,
@@ -110,6 +112,20 @@ const ChatWidget = () => {
     audioContext,
     sourceNode,
   } = useAudioRecorder({})
+
+  const fetchUrls = async () => {
+    try {
+      const res = await fetch('/api/urls', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId }),
+      })
+      const data = await res.json()
+      setDynamicUrls(data)
+    } catch (e) {
+      console.error('Failed to fetch URLs:', e)
+    }
+  }
 
   useEffect(() => {
     let storedId = localStorage.getItem('chat_user_id')
@@ -145,6 +161,18 @@ const ChatWidget = () => {
       }, 0)
     }
   }, [isOpen, chat.length])
+
+  useEffect(() => {
+    if (chat.some((msg) => msg.role === 'assistant')) {
+      fetchUrls()
+    }
+  }, [chat])
+
+  useEffect(() => {
+    if (chat.some((msg) => msg.role === 'assistant') && userId) {
+      fetchUrls()
+    }
+  }, [chat, userId])
 
   const formatTime = (timestamp) =>
     new Date(timestamp).toLocaleTimeString([], {
@@ -261,6 +289,7 @@ const ChatWidget = () => {
   const sendAudioToServer = async (audioBlob) => {
     const formData = new FormData()
     formData.append('audio', audioBlob, 'recording.webm')
+    formData.append('userId', userId)
 
     try {
       const res = await fetch('/api/transcribe', {
@@ -296,6 +325,62 @@ const ChatWidget = () => {
     }
   }
 
+  const handleTavilyClick = async (description, url) => {
+    const now = new Date()
+    setIsTavilyLoading(true)
+
+    setChat((prev) => [
+      ...prev,
+      {
+        role: 'assistant',
+        isThinking: true,
+        timestamp: now,
+      },
+    ])
+
+    try {
+      const res = await fetch('/api/tavily', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ description, userId }),
+      })
+
+      const data = await res.json()
+
+      setChat((prev) => {
+        const updated = [...prev]
+        updated[updated.length - 1] = {
+          role: 'assistant',
+          text: data.summary || '🤖 No summary provided.',
+          timestamp: new Date(),
+        }
+        return updated
+      })
+
+      await fetch('/api/delete-url', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, url }),
+      })
+
+      await fetchUrls()
+    } catch (error) {
+      console.error('Tavily fetch failed:', error)
+
+      setChat((prev) => {
+        const updated = [...prev]
+        updated[updated.length - 1] = {
+          role: 'assistant',
+          text: 'Unable to retrieve site description. Please try again later.',
+          timestamp: new Date(),
+        }
+        return updated
+      })
+    } finally {
+      setIsTavilyLoading(false)
+    }
+  }
+
   return (
     <>
       <button
@@ -310,7 +395,7 @@ const ChatWidget = () => {
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-[115px] sm:bottom-8 left-1/2 -translate-x-1/2 sm:left-auto sm:translate-x-0 sm:right-24 z-50 w-[90%] sm:w-[320px] rounded-xl border border-neutral-700 p-4 shadow-xl text-white bg-gradient-to-r from-[#0d1224] to-[#0a0d37]">
+        <div className="fixed bottom-0 sm:bottom-8 left-1/2 sm:left-auto -translate-x-1/2 sm:translate-x-0 sm:right-24 z-50 w-[90%] sm:w-[350px] rounded-xl border border-neutral-700 p-4 shadow-xl text-white bg-gradient-to-r from-[#0d1224] to-[#0a0d37]">
           <div className="flex flex-row justify-between items-center gap-2">
             <div className="flex  flex-row items-center gap-3 w-[80%] mb-4 rounded-xl border border-neutral-700 pl-[10px] pr-[10px] py-1 shadow-xl">
               <Image
@@ -341,10 +426,9 @@ const ChatWidget = () => {
               </button>
             </div>
           </div>
-
           <div
             ref={chatContainerRef}
-            className="flex flex-col h-64 overflow-y-auto pr-3 text-sm mb-2 space-y-3 custom-scroll"
+            className="flex flex-col h-64 sm:h-[42vh] overflow-y-auto pr-3 text-sm mb-2 space-y-3 custom-scroll"
           >
             {chat.map((msg, idx) => (
               <div
@@ -392,6 +476,22 @@ const ChatWidget = () => {
               </p>
             )}
           </div>
+          {dynamicUrls.length > 0 && (
+            <button
+              onClick={() =>
+                handleTavilyClick(
+                  dynamicUrls[0].description,
+                  dynamicUrls[0].url
+                )
+              }
+              disabled={isTavilyLoading}
+              className="mb-3 w-[48%] h-8 rounded-md bg-gradient-to-r from-pink-500 to-violet-600 px-2 text-white text-xs hover:brightness-110 transition flex items-center justify-center leading-tight text-center"
+            >
+              About{' '}
+              {dynamicUrls[0].shotName || new URL(dynamicUrls[0].url).hostname}{' '}
+              site?
+            </button>
+          )}
           <div className="relative w-full">
             <textarea
               value={isTranscribing ? '' : message}
@@ -431,7 +531,7 @@ const ChatWidget = () => {
           <button
             onClick={sendMessage}
             disabled={!message.trim()}
-            className="mt-3 w-full rounded-md bg-gradient-to-r from-pink-500 to-violet-600 py-2 px-4 text-white font-semibold hover:brightness-110 transition"
+            className="mt-3 w-full rounded-md bg-gradient-to-r from-pink-500 to-violet-600 py-2 px-4 text-white text-sm hover:brightness-110 transition"
           >
             Send
           </button>

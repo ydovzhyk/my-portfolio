@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server'
 import { db } from '../../../lib/firebaseAdmin'
 import { openai } from '../../../lib/openai'
 import { promptContent } from '../../../utils/data/promtContent'
+import { saveUrlsFromGptReply } from '../../../utils/saveUrlsFromGptReply'
+import { saveLangFromReply } from '../../../utils/saveLangFromReply'
+
 export async function POST(req) {
   try {
     const body = await req.json()
@@ -40,11 +43,20 @@ export async function POST(req) {
     const assistantReply =
       completion.choices?.[0]?.message?.content || '🤖 No reply'
 
-    existingMessages.push({ role: 'assistant', content: assistantReply, key })
+    const langMatch = assistantReply.match(/Language:\s*(\w+)/i)
+    const userLang = langMatch?.[1]?.toLowerCase() || 'english'
+
+    const cleanReply = assistantReply.replace(/Language:\s*\w+/i, '').trim()
+
+    saveUrlsFromGptReply(assistantReply, userId)
+
+    saveLangFromReply(userId, userLang)
+
+    existingMessages.push({ role: 'assistant', content: cleanReply, key })
 
     await chatRef.set({ messages: existingMessages }, { merge: true })
 
-    return NextResponse.json({ reply: assistantReply })
+    return NextResponse.json({ reply: cleanReply, language: userLang })
   } catch (error) {
     console.error('Error in /api/firebase:', error)
     return NextResponse.json(
@@ -53,4 +65,3 @@ export async function POST(req) {
     )
   }
 }
-
