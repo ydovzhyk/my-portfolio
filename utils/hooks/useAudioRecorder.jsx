@@ -8,9 +8,9 @@ const useAudioRecorder = ({ dataCb }) => {
   const [recordingTime, setRecordingTime] = useState(0)
   const [mediaRecorder, setMediaRecorder] = useState()
   const [timerInterval, setTimerInterval] = useState()
-  const sourceNode = useRef()
-  const scriptProcessor = useRef()
   const audioContext = useRef(null)
+  const sourceNode = useRef(null)
+  const workletNode = useRef(null)
   const audioChunksRef = useRef([])
 
   const _startTimer = useCallback(() => {
@@ -18,12 +18,12 @@ const useAudioRecorder = ({ dataCb }) => {
       setRecordingTime((time) => time + 1)
     }, 1000)
     setTimerInterval(interval)
-  }, [setRecordingTime, setTimerInterval])
+  }, [])
 
   const _stopTimer = useCallback(() => {
-    timerInterval != null && clearInterval(timerInterval)
+    if (timerInterval) clearInterval(timerInterval)
     setTimerInterval(undefined)
-  }, [timerInterval, setTimerInterval])
+  }, [timerInterval])
 
   const float32To16BitPCM = (float32Arr) => {
     const pcm16bit = new Int16Array(float32Arr.length)
@@ -36,43 +36,36 @@ const useAudioRecorder = ({ dataCb }) => {
 
   const startRecording = async () => {
     if (timerInterval != null) throw new Error('timerInterval not null')
-    const isTesting = !navigator.mediaDevices
-    if (isTesting) {
-      setIsRecording(true)
-      return 24000
-    }
 
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
-    if (!audioContext.current) {
-      audioContext.current = new (window.AudioContext ||
-        window.webkitAudioContext)()
-    }
-    audioContext.current.resume()
-    sourceNode.current = audioContext.current.createMediaStreamSource(stream)
-
-    const chunkSize = 4096
-    scriptProcessor.current = audioContext.current.createScriptProcessor(
-      chunkSize,
-      1,
-      1
+    audioContext.current = new (window.AudioContext ||
+      window.webkitAudioContext)()
+    await audioContext.current.audioWorklet.addModule(
+      '/audio-worklet/recorder-processor.js'
     )
 
-    scriptProcessor.current.onaudioprocess = (event) => {
-      const inputBuffer = event.inputBuffer
-      const float32Audio = inputBuffer.getChannelData(0)
+    sourceNode.current = audioContext.current.createMediaStreamSource(stream)
+    workletNode.current = new AudioWorkletNode(
+      audioContext.current,
+      'recorder-processor'
+    )
+
+    workletNode.current.port.onmessage = (event) => {
+      const float32Audio = event.data
       const pcm16Audio = float32To16BitPCM(float32Audio)
       if (dataCb) {
         dataCb(pcm16Audio, audioContext.current.sampleRate)
       }
     }
 
-    sourceNode.current.connect(scriptProcessor.current)
-    scriptProcessor.current.connect(audioContext.current.destination)
+    sourceNode.current
+      .connect(workletNode.current)
+      .connect(audioContext.current.destination)
 
     const recorder = new MediaRecorder(stream)
     setMediaRecorder(recorder)
-
     audioChunksRef.current = []
+
     recorder.ondataavailable = (event) => {
       if (event.data.size > 0) {
         audioChunksRef.current.push(event.data)
@@ -94,8 +87,8 @@ const useAudioRecorder = ({ dataCb }) => {
           type: 'audio/webm',
         })
         audioChunksRef.current = []
-        scriptProcessor.current?.disconnect()
         sourceNode.current?.disconnect()
+        workletNode.current?.disconnect()
         setRecordingTime(0)
         setIsRecording(false)
         setIsPaused(false)
@@ -117,7 +110,7 @@ const useAudioRecorder = ({ dataCb }) => {
       _stopTimer()
       mediaRecorder?.pause()
     }
-  }, [mediaRecorder, setIsPaused, _startTimer, _stopTimer])
+  }, [mediaRecorder, isPaused, _startTimer, _stopTimer])
 
   return {
     startRecording,

@@ -39,12 +39,12 @@ export async function POST(req) {
 
     if (detectedLang === 'russian') {
       const translation = await openai.chat.completions.create({
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-4o',
         messages: [
           {
             role: 'system',
             content:
-              'Ти перекладач. Завжди перекладай лише з російської на українську. Не пояснюй нічого, просто переклади.',
+              'You are a translator. Always translate only from Russian to Ukrainian. Do not explain anything, just translate.',
           },
           {
             role: 'user',
@@ -64,4 +64,65 @@ export async function POST(req) {
   }
 }
 
+////////////////////////////////////////////////////////
+// import { NextResponse } from 'next/server'
+// import { createClient } from '@deepgram/sdk'
+// import { writeFile, unlink } from 'fs/promises'
+// import fs from 'fs'
+// import path from 'path'
+// import os from 'os'
+// import { randomUUID } from 'crypto'
 
+// const deepgram = createClient(process.env.DEEPGRAM_API_KEY)
+
+// export async function POST(req) {
+//   try {
+//     const formData = await req.formData()
+//     const file = formData.get('audio')
+
+//     if (!file || typeof file === 'string') {
+//       return NextResponse.json({ error: 'Invalid file' }, { status: 400 })
+//     }
+
+//     const buffer = Buffer.from(await file.arrayBuffer())
+//     const filename = `${randomUUID()}.webm`
+//     const tmpDir = os.tmpdir()
+//     const filepath = path.join(tmpDir, filename)
+
+//     await writeFile(filepath, buffer)
+
+//     const fileBuffer = fs.readFileSync(filepath)
+//     const { result, error } = await deepgram.listen.prerecorded.transcribeFile(
+//       fileBuffer,
+//       {
+//         model: 'nova-2',
+//         language: 'uk',
+//         smart_format: true,
+//         punctuate: true,
+//         mimetype: 'audio/webm',
+//       }
+//     )
+
+//     await unlink(filepath)
+
+//     if (error) {
+//       console.error('[Deepgram Error]', error)
+//       return NextResponse.json(
+//         { error: 'Transcription failed' },
+//         { status: 500 }
+//       )
+//     }
+
+//     const transcript =
+//       result?.results?.channels?.[0]?.alternatives?.[0]?.transcript || ''
+//     const detectedLang = result?.results?.language || 'unknown'
+
+//     console.log('Transcription:', transcript)
+//     console.log('Detected Language:', detectedLang)
+
+//     return NextResponse.json({ text: transcript, language: detectedLang })
+//   } catch (e) {
+//     console.error('[Deepgram Transcription Error]', e)
+//     return NextResponse.json({ error: 'Transcription failed' }, { status: 500 })
+//   }
+// }
