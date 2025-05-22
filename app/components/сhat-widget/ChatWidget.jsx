@@ -426,72 +426,148 @@ const ChatWidget = () => {
               </button>
             </div>
           </div>
-          <div
-            ref={chatContainerRef}
-            className="flex flex-col h-64 sm:h-[42vh] overflow-y-auto pr-3 text-sm mb-2 space-y-3 custom-scroll"
-          >
-            {chat.map((msg, idx) => (
-              <div
-                key={idx}
-                className={`flex flex-col ${
-                  msg.role === 'user' ? 'items-end' : 'items-start'
-                }`}
-              >
+
+          {/* <div className="border border-gray-50 h-64 sm:h-[62vh]">
+            <div
+              ref={chatContainerRef}
+              className="flex flex-col h-64 sm:h-[42vh] overflow-y-auto pr-3 text-sm mb-2 space-y-3 custom-scroll"
+            >
+              {chat.map((msg, idx) => (
                 <div
-                  className={`max-w-[92%] p-2 rounded-md overflow-hidden break-words ${
-                    msg.role === 'user'
-                      ? 'bg-pink-600 text-white'
-                      : 'bg-[#221A4A] text-gray-200'
+                  key={idx}
+                  className={`flex flex-col ${
+                    msg.role === 'user' ? 'items-end' : 'items-start'
                   }`}
                 >
-                  {msg.isThinking ? (
-                    <ThinkingDots />
-                  ) : (
-                    <div className="prose prose-invert text-sm font-extralight">
-                      <ReactMarkdown
-                        components={{
-                          a: ({ node, ...props }) => (
-                            <a
-                              {...props}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            />
-                          ),
-                        }}
-                      >
-                        {msg.text}
-                      </ReactMarkdown>
-                    </div>
-                  )}
+                  <div
+                    className={`max-w-[92%] p-2 rounded-md overflow-hidden break-words ${
+                      msg.role === 'user'
+                        ? 'bg-pink-600 text-white'
+                        : 'bg-[#221A4A] text-gray-200'
+                    }`}
+                  >
+                    {msg.isThinking ? (
+                      <ThinkingDots />
+                    ) : (
+                      <div className="prose prose-invert text-sm font-extralight">
+                        <ReactMarkdown
+                          components={{
+                            a: ({ node, ...props }) => (
+                              <a
+                                {...props}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              />
+                            ),
+                          }}
+                        >
+                          {msg.text}
+                        </ReactMarkdown>
+                      </div>
+                    )}
+                  </div>
+                  <div className="text-xs text-gray-400 mt-1">
+                    {msg.role === 'user' ? 'Guest' : 'Portfolio Assistant'} ·{' '}
+                    {formatTime(msg.timestamp)}
+                  </div>
                 </div>
-                <div className="text-xs text-gray-400 mt-1">
-                  {msg.role === 'user' ? 'Guest' : 'Portfolio Assistant'} ·{' '}
-                  {formatTime(msg.timestamp)}
+              ))}
+              {error && (
+                <p className="text-red-400 text-xs">
+                  Something went wrong. Try again.
+                </p>
+              )}
+            </div>
+            {dynamicUrls.length > 0 && (
+              <button
+                onClick={() =>
+                  handleTavilyClick(
+                    dynamicUrls[0].description,
+                    dynamicUrls[0].url
+                  )
+                }
+                disabled={isTavilyLoading}
+                className="mb-3 w-[48%] h-8 rounded-md bg-gradient-to-r from-pink-500 to-violet-600 px-2 text-white text-xs hover:brightness-110 transition flex items-center justify-center leading-tight text-center"
+              >
+                About{' '}
+                {dynamicUrls[0].shotName ||
+                  new URL(dynamicUrls[0].url).hostname}{' '}
+                site?
+              </button>
+            )}
+          </div> */}
+
+          <div className="h-[420px] sm:h-[50vh] flex flex-col">
+            <div
+              ref={chatContainerRef}
+              className="flex flex-col flex-1 overflow-y-auto pr-3 text-sm mb-2 space-y-3 custom-scroll"
+            >
+              {chat.map((msg, idx) => (
+                <div
+                  key={idx}
+                  className={`flex flex-col ${
+                    msg.role === 'user' ? 'items-end' : 'items-start'
+                  }`}
+                >
+                  <div
+                    className={`max-w-[92%] p-2 rounded-md overflow-hidden break-words ${
+                      msg.role === 'user'
+                        ? 'bg-pink-600 text-white'
+                        : 'bg-[#221A4A] text-gray-200'
+                    }`}
+                  >
+                    {msg.isThinking ? (
+                      <ThinkingDots />
+                    ) : (
+                      <div className="prose prose-invert text-sm font-extralight">
+                        <ReactMarkdown
+                          components={{
+                            a: ({ node, ...props }) => (
+                              <a
+                                {...props}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              />
+                            ),
+                          }}
+                        >
+                          {msg.text}
+                        </ReactMarkdown>
+                      </div>
+                    )}
+                  </div>
+                  <div className="text-xs text-gray-400 mt-1">
+                    {msg.role === 'user' ? 'Guest' : 'Portfolio Assistant'} ·{' '}
+                    {formatTime(msg.timestamp)}
+                  </div>
                 </div>
-              </div>
-            ))}
-            {error && (
-              <p className="text-red-400 text-xs">
-                Something went wrong. Try again.
-              </p>
+              ))}
+              {error && (
+                <p className="text-red-400 text-xs">
+                  Something went wrong. Try again.
+                </p>
+              )}
+            </div>
+
+            {dynamicUrls.length > 0 && (
+              <button
+                onClick={() =>
+                  handleTavilyClick(
+                    dynamicUrls[0].description,
+                    dynamicUrls[0].url
+                  )
+                }
+                disabled={isTavilyLoading}
+                className="mb-3 w-[48%] h-8 rounded-md bg-gradient-to-r from-pink-500 to-violet-600 px-2 text-white text-xs hover:brightness-110 transition flex items-center justify-center leading-tight text-center"
+              >
+                About{' '}
+                {dynamicUrls[0].shotName ||
+                  new URL(dynamicUrls[0].url).hostname}{' '}
+                site?
+              </button>
             )}
           </div>
-          {dynamicUrls.length > 0 && (
-            <button
-              onClick={() =>
-                handleTavilyClick(
-                  dynamicUrls[0].description,
-                  dynamicUrls[0].url
-                )
-              }
-              disabled={isTavilyLoading}
-              className="mb-3 w-[48%] h-8 rounded-md bg-gradient-to-r from-pink-500 to-violet-600 px-2 text-white text-xs hover:brightness-110 transition flex items-center justify-center leading-tight text-center"
-            >
-              About{' '}
-              {dynamicUrls[0].shotName || new URL(dynamicUrls[0].url).hostname}{' '}
-              site?
-            </button>
-          )}
+
           <div className="relative w-full">
             <textarea
               value={isTranscribing ? '' : message}

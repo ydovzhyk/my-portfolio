@@ -24,10 +24,7 @@ export async function POST(req) {
 
     const lastMessages = existingMessages
       .slice(-20)
-      .map(({ role, content }) => ({
-        role,
-        content,
-      }))
+      .map(({ role, content }) => ({ role, content }))
 
     const systemPrompt = {
       role: 'system',
@@ -48,9 +45,8 @@ export async function POST(req) {
 
     const cleanReply = assistantReply.replace(/Language:\s*\w+/i, '').trim()
 
-    saveUrlsFromGptReply(assistantReply, userId)
-
-    saveLangFromReply(userId, userLang)
+    await saveUrlsFromGptReply(assistantReply, userId)
+    await saveLangFromReply(userId, userLang)
 
     existingMessages.push({ role: 'assistant', content: cleanReply, key })
 

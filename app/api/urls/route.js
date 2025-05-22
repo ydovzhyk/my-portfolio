@@ -1,32 +1,26 @@
-import fs from 'fs'
-import path from 'path'
+import { db } from '../../../lib/firebaseAdmin'
 
 export async function POST(req) {
   try {
     const { userId } = await req.json()
+
     if (!userId) {
       return new Response(JSON.stringify({ error: 'Missing userId' }), {
         status: 400,
       })
     }
 
-    const filePath = path.join(process.cwd(), 'utils/data/urls.js')
-    const fileContent = fs.readFileSync(filePath, 'utf-8')
+    const doc = await db.collection('urls').doc(userId).get()
 
-    const match = fileContent.match(/export const savedUrls = (.*);/s)
-
-    if (!match) {
-      return new Response(
-        JSON.stringify({ error: 'The file does not contain savedUrls.' }),
-        {
-          status: 500,
-        }
-      )
+    if (!doc.exists) {
+      return new Response(JSON.stringify([]), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      })
     }
 
-    const parsed = JSON.parse(match[1])
-
-    const userUrls = parsed.filter((url) => url.userId === userId)
+    const data = doc.data()
+    const userUrls = Array.isArray(data.urls) ? data.urls : []
 
     return new Response(JSON.stringify(userUrls), {
       status: 200,

@@ -1,8 +1,8 @@
-import fs from 'fs'
-import path from 'path'
 import { URL } from 'url'
 import { projectsData } from './data/projects-data'
-export function saveUrlsFromGptReply(gptText, userId) {
+import { db } from '../lib/firebaseAdmin'
+
+export async function saveUrlsFromGptReply(gptText, userId) {
   const urlRegex = /(https?:\/\/[^\s)]+)/g
   const matches = gptText.match(urlRegex) || []
 
@@ -30,34 +30,8 @@ export function saveUrlsFromGptReply(gptText, userId) {
     }
   })
 
-  const filePath = path.join(process.cwd(), 'utils/data/urls.js')
-
-  let data = []
-  if (fs.existsSync(filePath)) {
-    try {
-      const raw = fs.readFileSync(filePath, 'utf-8')
-      const match = raw.match(/export const savedUrls = (.*);/)
-      if (match && match[1]) {
-        data = JSON.parse(match[1])
-      }
-    } catch (e) {
-      console.error('Failed to read urls.js:', e)
-    }
-  }
-
-  const updatedData = data.filter((entry) => entry.userId !== userId)
-
-  urlsForUser.forEach((entry) =>
-    updatedData.push({
-      ...entry,
-      userId,
-    })
-  )
-
-  const fileContent =
-    'export const savedUrls = ' + JSON.stringify(updatedData, null, 2) + ';\n'
-
-  fs.writeFileSync(filePath, fileContent, 'utf-8')
+  const userDocRef = db.collection('urls').doc(userId)
+  await userDocRef.set({ urls: urlsForUser }, { merge: true })
 
   return {
     success: true,

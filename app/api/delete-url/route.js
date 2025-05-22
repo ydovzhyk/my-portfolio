@@ -1,5 +1,4 @@
-import fs from 'fs'
-import path from 'path'
+import { db } from '../../../lib/firebaseAdmin'
 
 export async function POST(req) {
   try {
@@ -11,29 +10,24 @@ export async function POST(req) {
       })
     }
 
-    const filePath = path.join(process.cwd(), 'utils/data/urls.js')
-    const fileContent = fs.readFileSync(filePath, 'utf-8')
+    const docRef = db.collection('urls').doc(userId)
+    const doc = await docRef.get()
 
-    const match = fileContent.match(/export const savedUrls = (.*);/s)
-    if (!match) {
-      return new Response(JSON.stringify({ error: 'No savedUrls found' }), {
-        status: 500,
+    if (!doc.exists) {
+      return new Response(JSON.stringify({ error: 'Document not found' }), {
+        status: 404,
       })
     }
 
-    const parsed = JSON.parse(match[1])
+    const currentUrls = doc.data().urls || []
 
-    const filtered = parsed.filter(
-      (entry) => !(entry.userId === userId && entry.url === url)
-    )
+    const updatedUrls = currentUrls.filter((entry) => entry.url !== url)
 
-    const fileUpdated =
-      'export const savedUrls = ' + JSON.stringify(filtered, null, 2) + ';\n'
-    fs.writeFileSync(filePath, fileUpdated, 'utf-8')
+    await docRef.update({ urls: updatedUrls })
 
     return new Response(JSON.stringify({ success: true }))
   } catch (err) {
-    console.error('Error in /api/remove-url:', err)
+    console.error('Error in /api/delete-url:', err)
     return new Response(JSON.stringify({ error: 'Internal Server Error' }), {
       status: 500,
     })

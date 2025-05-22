@@ -1,7 +1,6 @@
-// /app/api/tavily/route.js
 import { NextResponse } from 'next/server'
 import { openai } from '../../../lib/openai'
-import { userLangs } from '../../../utils/data/langs'
+import { db } from '../../../lib/firebaseAdmin'
 
 export async function POST(req) {
   try {
@@ -11,8 +10,8 @@ export async function POST(req) {
       return NextResponse.json({ error: 'Missing fields' }, { status: 400 })
     }
 
-    const userEntry = userLangs.find((entry) => entry.userId === userId)
-    const lang = userEntry?.lang?.toLowerCase() || 'english'
+    const langDoc = await db.collection('langs').doc(userId).get()
+    const lang = langDoc.exists ? langDoc.data().lang?.toLowerCase() : 'english'
 
     if (lang === 'english') {
       return NextResponse.json({ summary: description })
