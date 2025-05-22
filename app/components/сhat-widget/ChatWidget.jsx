@@ -153,6 +153,10 @@ const ChatWidget = () => {
     })
 
   const toggleChat = () => {
+    const audio = new Audio('/sounds/new-notification.mp3')
+    audio.play().catch((e) => {
+      console.warn('Failed to play sound:', e)
+    })
     if (isOpen) {
       sendChatToTelegram()
     } else {
