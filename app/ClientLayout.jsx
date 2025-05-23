@@ -1,10 +1,10 @@
 'use client'
 
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Header from './components/header';
-import ScrollToTop from './components/helper/scroll-to-top';
-import ChatWidget from './components/chat-widget/ChatWidget';
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import Header from './components/header'
+import ScrollToTop from './components/helper/scroll-to-top'
+import ChatWidget from './components/chat-widget/chatWidget'
 
 export default function ClientLayout({ children }) {
   return (
