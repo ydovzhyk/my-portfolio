@@ -7,7 +7,7 @@ import { PiBroomLight } from 'react-icons/pi'
 import { TiMessages } from 'react-icons/ti'
 import ReactMarkdown from 'react-markdown'
 import useAudioRecorder from '../../../utils/hooks/useAudioRecorder'
-import AudioVisualizer from '../audio-visualizer/AudioVisualizer'
+import AudioVisualizer from '../audio-visualizer/audioVisualizer'
 import { greetings } from '../../../utils/data/greetings'
 import { CiMicrophoneOn } from 'react-icons/ci'
 import { IoStopCircleOutline } from 'react-icons/io5'
@@ -122,8 +122,8 @@ const ChatWidget = () => {
       })
       const data = await res.json()
       setDynamicUrls(data)
-    } catch (e) {
-      console.error('Failed to fetch URLs:', e)
+    } catch (error) {
+      console.error('Failed to fetch URLs:', error)
     }
   }
 
@@ -161,12 +161,6 @@ const ChatWidget = () => {
       }, 0)
     }
   }, [isOpen, chat.length])
-
-  useEffect(() => {
-    if (chat.some((msg) => msg.role === 'assistant')) {
-      fetchUrls()
-    }
-  }, [chat])
 
   useEffect(() => {
     if (chat.some((msg) => msg.role === 'assistant') && userId) {
@@ -325,7 +319,11 @@ const ChatWidget = () => {
     }
   }
 
-  const handleTavilyClick = async (description, url) => {
+  function generateDescriptionMessage(shotName, projectUrl) {
+    return `Project ${shotName} (${projectUrl}). Select the saved description of this project. Detect the user's language based on the previous conversation history and return the description in that language.`
+  }
+
+  const handleAvtoClick = async (shotName, url) => {
     const now = new Date()
     setIsTavilyLoading(true)
 
@@ -338,20 +336,23 @@ const ChatWidget = () => {
       },
     ])
 
+    const currentMessage = generateDescriptionMessage(shotName, url)
+    const key = `chat_${Date.now()}`
+
     try {
-      const res = await fetch('/api/tavily', {
+      const response = await fetch('/api/firebase', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ description, userId }),
+        body: JSON.stringify({ message: currentMessage, key, userId }),
       })
 
-      const data = await res.json()
+      const data = await response.json()
 
       setChat((prev) => {
         const updated = [...prev]
         updated[updated.length - 1] = {
           role: 'assistant',
-          text: data.summary || '🤖 No summary provided.',
+          text: data.reply || '🤖 Got your message!',
           timestamp: new Date(),
         }
         return updated
@@ -478,21 +479,21 @@ const ChatWidget = () => {
               )}
             </div>
             {dynamicUrls.length > 0 && (
-              <button
-                onClick={() =>
-                  handleTavilyClick(
-                    dynamicUrls[0].description,
-                    dynamicUrls[0].url
-                  )
-                }
-                disabled={isTavilyLoading}
-                className="mb-3 w-[48%] h-8 rounded-md bg-gradient-to-r from-pink-500 to-violet-600 px-2 text-white text-xs hover:brightness-110 transition flex items-center justify-center leading-tight text-center"
-              >
-                About{' '}
-                {dynamicUrls[0].shotName ||
-                  new URL(dynamicUrls[0].url).hostname}{' '}
-                site?
-              </button>
+              <div className="flex w-[100%] gap-3 mb-3">
+                {dynamicUrls
+                  .slice(-2)
+                  .reverse()
+                  .map((link, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => handleAvtoClick(link.shotName, link.url)}
+                      disabled={isTavilyLoading}
+                      className="h-8 w-[45%] rounded-md bg-gradient-to-r from-pink-500 to-violet-600 px-2 text-white text-xs hover:brightness-110 transition flex items-center justify-center leading-tight text-center"
+                    >
+                      About {link.shotName || new URL(link.url).hostname} site?
+                    </button>
+                  ))}
+              </div>
             )}
           </div>
           <div className="relative w-full">

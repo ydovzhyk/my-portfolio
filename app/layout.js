@@ -1,7 +1,7 @@
 import { GoogleTagManager } from '@next/third-parties/google'
 import { Inter } from 'next/font/google'
 import 'react-toastify/dist/ReactToastify.css'
-import ClientLayout from './ClientLayout'
+import ClientLayout from './clientLayout'
 import Footer from './components/footer'
 import './css/card.scss'
 import './css/globals.scss'

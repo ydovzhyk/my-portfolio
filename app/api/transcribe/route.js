@@ -1,11 +1,10 @@
+import { randomUUID } from 'crypto'
+import fs from 'fs'
+import { unlink, writeFile } from 'fs/promises'
 import { NextResponse } from 'next/server'
 import OpenAI from 'openai'
-import { writeFile, unlink } from 'fs/promises'
-import fs from 'fs'
-import path from 'path'
 import os from 'os'
-import { randomUUID } from 'crypto'
-import { saveLangFromReply } from '../../../utils/saveLangFromReply'
+import path from 'path'
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -15,7 +14,6 @@ export async function POST(req) {
   try {
     const formData = await req.formData()
     const file = formData.get('audio')
-    const userId = formData.get('userId')
 
     if (!file || typeof file === 'string') {
       return NextResponse.json({ error: 'Invalid file' }, { status: 400 })
@@ -37,8 +35,6 @@ export async function POST(req) {
     const transcript = transcription.text || ''
     const detectedLang = transcription.language
 
-    saveLangFromReply(userId, detectedLang)
-
     await unlink(filepath)
 
     if (detectedLang === 'russian') {
@@ -58,10 +54,10 @@ export async function POST(req) {
       })
 
       const translated = translation.choices[0]?.message?.content?.trim() || ''
-      return NextResponse.json({ text: translated, language: 'uk' })
+      return NextResponse.json({ text: translated })
     }
 
-    return NextResponse.json({ text: transcript, language: detectedLang })
+    return NextResponse.json({ text: transcript })
   } catch (e) {
     console.error('[Transcription Error]', e)
     return NextResponse.json({ error: 'Transcription failed' }, { status: 500 })

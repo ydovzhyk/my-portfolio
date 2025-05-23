@@ -1,6 +1,6 @@
 import { URL } from 'url'
-import { projectsData } from './data/projects-data'
-import { db } from '../lib/firebaseAdmin'
+import { db } from '../../lib/firebaseAdmin'
+import { projectsData } from '../data/projects-data'
 
 export async function saveUrlsFromGptReply(gptText, userId) {
   const urlRegex = /(https?:\/\/[^\s)]+)/g
@@ -17,7 +17,7 @@ export async function saveUrlsFromGptReply(gptText, userId) {
     }
   })
 
-  const urlsForUser = filteredUrls.map((url) => {
+  const newUrls = filteredUrls.map((url) => {
     const matchedProject = projectsData.find((project) =>
       url.includes(new URL(project.demo).hostname)
     )
@@ -25,18 +25,32 @@ export async function saveUrlsFromGptReply(gptText, userId) {
     return {
       url,
       shotName: matchedProject?.shotName || null,
-      description: matchedProject?.description || null,
       addedAt: new Date().toISOString(),
     }
   })
 
   const userDocRef = db.collection('urls').doc(userId)
-  await userDocRef.set({ urls: urlsForUser }, { merge: true })
+  const doc = await userDocRef.get()
+
+  const existingUrls =
+    doc.exists && Array.isArray(doc.data()?.urls) ? doc.data().urls : []
+
+  const updatedUrls = [...existingUrls]
+
+  for (const newUrl of newUrls) {
+    const alreadyExists = existingUrls.some((u) => u.url === newUrl.url)
+    if (!alreadyExists) {
+      updatedUrls.push(newUrl)
+    }
+  }
+
+  await userDocRef.set({ urls: updatedUrls }, { merge: true })
 
   return {
     success: true,
     found: matches.length,
-    saved: urlsForUser.length,
+    saved: updatedUrls.length - existingUrls.length,
     updated: true,
   }
 }
+

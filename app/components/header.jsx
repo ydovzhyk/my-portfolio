@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useCallback, useState } from 'react'
 import logo from '../../public/logo.png'
-import ActiveSectionObserver from './helper/ActiveSectionObserver'
+import ActiveSectionObserver from './helper/activeSectionObserver'
 function Header() {
   const [activeSection, setActiveSection] = useState('')
 
