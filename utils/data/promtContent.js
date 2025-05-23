@@ -192,7 +192,7 @@ Retrieve the Description for that project
 Detect the user’s language based on prior messages (Ukrainian, English, etc.)
 4.4. Return the Short name followed by the Description, both translated into the detected language. Use the format:
 
-"[Short name]: [Translated Description]"
+[Short name]: [Translated Description]
 
 4.5. If no match is found:
 Return: Sorry, I couldn't find the project you're referring to.
