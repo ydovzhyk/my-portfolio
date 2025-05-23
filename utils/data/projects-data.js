@@ -1,7 +1,7 @@
 export const projectsData = [
   {
     id: 1,
-    name: 'BlueHouse – Reykjavik Rentals',
+    name: 'BlueHouse',
     shotName: 'BlueHouse',
     tools: ['React', 'Redux', 'Sass', 'Webpack'],
     role: 'Frontend Developer',
@@ -40,7 +40,7 @@ export const projectsData = [
   },
   {
     id: 3,
-    name: 'Art Studio Dental – Dental Clinic Website',
+    name: 'Art Studio Dental',
     shotName: 'Art Studio Dental',
     tools: ['React', 'Redux', 'Sass', 'React I18next', 'React Helmet'],
     role: 'Frontend Developer',
@@ -54,7 +54,7 @@ export const projectsData = [
   },
   {
     id: 4,
-    name: 'Middle Way – School & Kindergarten Website',
+    name: 'Middle Way',
     shotName: 'Middle Way',
     tools: [
       'React',
@@ -107,7 +107,7 @@ export const projectsData = [
   },
   {
     id: 6,
-    name: 'Easy-Shop – Online Marketplace',
+    name: 'Easy-Shop',
     shotName: 'Easy-Shop',
     tools: [
       'React',
