@@ -232,18 +232,11 @@ const ChatWidget = () => {
 
       const data = await response.json()
 
-      const replyChunks = Array.isArray(data.replyChunks)
-        ? data.replyChunks
-        : []
-      const fullText = replyChunks.length
-        ? replyChunks.join('')
-        : '🤖 Got your message!'
-
       setChat((prev) => {
         const updated = [...prev]
         updated[updated.length - 1] = {
           role: 'assistant',
-          text: fullText,
+          text: data.reply || '🤖 Got your message!',
           timestamp: new Date(),
         }
         return updated
@@ -293,25 +286,23 @@ const ChatWidget = () => {
     formData.append('userId', userId)
 
     try {
-      const response = await fetch('/api/transcribe', {
+      const res = await fetch('/api/transcribe', {
         method: 'POST',
         body: formData,
       })
 
-      const data = await response.json()
-
-      const fullText = Array.isArray(data.replyChunks)
-        ? data.replyChunks.join('')
-        : data.text || '🤖 Got your message!'
-
-      setMessage(fullText)
-    } catch (error) {
-      console.error('Failed to send audio:', error)
+      const data = await res.json()
+      if (data.text) {
+        setMessage(data.text)
+      } else {
+        console.warn('No transcription result')
+      }
+    } catch (err) {
+      console.error('Failed to send audio:', err)
     } finally {
       setIsTranscribing(false)
     }
   }
-
 
   const handleMicClick = async () => {
     if (!isRecording) {
@@ -819,11 +810,18 @@ export default ChatWidget
 
 //       const data = await response.json()
 
+//       const replyChunks = Array.isArray(data.replyChunks)
+//         ? data.replyChunks
+//         : []
+//       const fullText = replyChunks.length
+//         ? replyChunks.join('')
+//         : '🤖 Got your message!'
+
 //       setChat((prev) => {
 //         const updated = [...prev]
 //         updated[updated.length - 1] = {
 //           role: 'assistant',
-//           text: data.reply || '🤖 Got your message!',
+//           text: fullText,
 //           timestamp: new Date(),
 //         }
 //         return updated
@@ -873,19 +871,20 @@ export default ChatWidget
 //     formData.append('userId', userId)
 
 //     try {
-//       const res = await fetch('/api/transcribe', {
+//       const response = await fetch('/api/transcribe', {
 //         method: 'POST',
 //         body: formData,
 //       })
 
-//       const data = await res.json()
-//       if (data.text) {
-//         setMessage(data.text)
-//       } else {
-//         console.warn('No transcription result')
-//       }
-//     } catch (err) {
-//       console.error('Failed to send audio:', err)
+//       const data = await response.json()
+
+//       const fullText = Array.isArray(data.replyChunks)
+//         ? data.replyChunks.join('')
+//         : data.text || '🤖 Got your message!'
+
+//       setMessage(fullText)
+//     } catch (error) {
+//       console.error('Failed to send audio:', error)
 //     } finally {
 //       setIsTranscribing(false)
 //     }

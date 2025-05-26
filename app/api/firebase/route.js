@@ -49,14 +49,7 @@ export async function POST(req) {
 
     await chatRef.set({ messages: existingMessages }, { merge: true })
 
-    const MAX_LENGTH = 3500
-    const parts =
-      assistantReply.match(new RegExp(`.{1,${MAX_LENGTH}}`, 'gs')) || []
-
-    return NextResponse.json({
-      replyChunks: parts,
-      isChunked: parts.length > 1,
-    })
+    return NextResponse.json({ reply: assistantReply })
   } catch (error) {
     console.error('Error in /api/firebase:', error)
     return NextResponse.json(
@@ -117,7 +110,14 @@ export async function POST(req) {
 
 //     await chatRef.set({ messages: existingMessages }, { merge: true })
 
-//     return NextResponse.json({ reply: assistantReply })
+//     const MAX_LENGTH = 3500
+//     const parts =
+//       assistantReply.match(new RegExp(`.{1,${MAX_LENGTH}}`, 'gs')) || []
+
+//     return NextResponse.json({
+//       replyChunks: parts,
+//       isChunked: parts.length > 1,
+//     })
 //   } catch (error) {
 //     console.error('Error in /api/firebase:', error)
 //     return NextResponse.json(
