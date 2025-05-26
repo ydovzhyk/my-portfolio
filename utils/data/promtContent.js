@@ -237,4 +237,13 @@ Description: A team project for discovering events around the world. Users can b
 Short name: Booking Apartment
 ProjectURL: https://bookingapart.netlify.app/
 Description: A platform for booking apartments across Ukraine. Users can view listings, check availability, and chat with property owners in real time. Features include filtering, maps, reviews, favorite lists, and user-submitted listings. Development is ongoing.
+
+5. When the user asks about a specific project:
+– Always reference project details from the **Key Projects** section above, not from the simplified collection at the bottom.
+– Respond with the full project description from the Key Projects list, including role, technologies, contributions, and relevant links.
+
+6. If the user asks:
+– “What was Yuriy’s first project?” or “Which was his earliest project?” — find the project with the earliest **start date** from the Key Projects list and provide details accordingly.
+– “What is Yuriy’s most recent project?” or “What is his latest work?” — return the project with the most recent **start date**.
+– Use the project dates listed in parentheses after the title to determine chronological order.
 `

@@ -6,21 +6,41 @@ export async function saveUrlsFromGptReply(gptText, userId) {
   const urlRegex = /(https?:\/\/[^\s)]+)/g
   const matches = gptText.match(urlRegex) || []
 
-  const excludedDomains = ['github.com', 'linkedin.com', 'youtube.com']
+  const excludedDomains = [
+    'github.com',
+    'linkedin.com',
+    'youtube.com',
+    'facebook.com',
+    'ydovzhyk.com',
+  ]
 
   const filteredUrls = matches.filter((url) => {
     try {
       const parsed = new URL(url)
-      return !excludedDomains.includes(parsed.hostname)
+      const hostname = parsed.hostname.replace(/^www\./, '')
+
+      return !excludedDomains.includes(hostname)
     } catch {
       return false
     }
   })
 
   const newUrls = filteredUrls.map((url) => {
-    const matchedProject = projectsData.find((project) =>
-      url.includes(new URL(project.demo).hostname)
-    )
+
+    const matchedProject = projectsData.find((project) => {
+      try {
+        const inputUrl = new URL(url)
+        const demoUrl = new URL(project.demo)
+
+        return (
+          inputUrl.hostname === demoUrl.hostname &&
+          inputUrl.pathname.replace(/\/$/, '') ===
+            demoUrl.pathname.replace(/\/$/, '')
+        )
+      } catch {
+        return false
+      }
+    })
 
     return {
       url,

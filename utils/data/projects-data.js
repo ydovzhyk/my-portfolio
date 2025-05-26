@@ -7,7 +7,6 @@ export const projectsData = [
     role: 'Frontend Developer',
     description:
       'Refactored the existing website codebase, fixing legacy bugs and outdated logic. Developed apartment listing and payment pages from scratch. Added responsive layouts for mobile and tablet. Improved SEO — PageSpeed Insights averaged 98%. Integrated structured data and meta tags for search visibility. Helped set up the GitHub repo and documented collaboration guidelines. Met with designers to review the Figma template and align on fixes. The project was approved by the company owner.',
-    code: '',
     frontendGitLink: 'https://github.com/ydovzhyk/BlueHouse',
     backendGitLink: '',
     demo: 'https://bluehouse-bb.netlify.app',
@@ -31,8 +30,6 @@ export const projectsData = [
     role: 'Full Stack Developer',
     description:
       'A real-time voice translation app built as a personal project. The client side uses WebSockets for low-latency audio streaming and receives real-time transcription and translation. Users can save recordings, transcriptions, and translations. The backend integrates Deepgram SDK for speech-to-text and OpenAI GPT-4 for multilingual translation. Development of the app is ongoing.',
-
-    code: '',
     frontendGitLink: 'https://github.com/ydovzhyk/SpeakFlow',
     backendGitLink: 'https://github.com/ydovzhyk/test-task-backend',
     demo: 'https://speakflow.netlify.app/',
@@ -46,7 +43,6 @@ export const projectsData = [
     role: 'Frontend Developer',
     description:
       'Designed and built a fully functional, multilingual website for a real dental clinic from scratch, without using any templates. The design and content were closely coordinated with the client. Focused on responsiveness, clean design, and SEO optimization. Implemented React Helmet for meta management and integrated Google Analytics. The site is actively maintained and live in production.',
-    code: '',
     frontendGitLink: 'https://asdental.org/en',
     backendGitLink: '',
     demo: 'https://asdental.org/',
@@ -71,7 +67,6 @@ export const projectsData = [
     role: 'Full Stack Developer',
     description:
       'Built a commercial website for a private school and kindergarten from scratch. All design and content were aligned with the client. The responsive frontend is SEO-optimized. Backend includes admin mode for managing appointments, feedback, events, and authentication. Features trial visit booking, contact form, and event creation. Integrated SendGrid, Twilio, and Firebase. Development is ongoing.',
-    code: '',
     frontendGitLink: 'https://github.com/ydovzhyk/middle-way-copy',
     backendGitLink: 'https://github.com/ydovzhyk/middleway-backend-copy',
     demo: 'https://middleway.in.ua/',
@@ -99,7 +94,6 @@ export const projectsData = [
     role: 'Full Stack Developer',
     description:
       'My first educational project built with Next.js and Tailwind CSS. The app allows users to search and book apartments based on various criteria, contact property owners via real-time chat (WebSockets), and list their own properties. The server handles data storage, filtering, and messaging. Development is ongoing.',
-    code: '',
     frontendGitLink: 'https://github.com/ydovzhyk/booking_appartement',
     backendGitLink: 'https://github.com/ydovzhyk/test-task-backend',
     demo: 'https://bookingapart.netlify.app/',
@@ -126,7 +120,6 @@ export const projectsData = [
     role: 'Full Stack Developer / Team Lead',
     description:
       'Led a team of 5 developers to build an e-commerce platform for buying and selling goods. Set up project structure, Redux, Axios, styling, and GitHub workflow for team collaboration. Developed complex components like chats and product/user management. Fully handled backend development. The project was completed in 2.5 months.',
-    code: '',
     frontendGitLink: 'https://github.com/ydovzhyk/easy-shop',
     backendGitLink: 'https://github.com/ydovzhyk/easy-shop-backend',
     demo: 'https://easy-shop-team.netlify.app/',
@@ -149,7 +142,6 @@ export const projectsData = [
     role: 'Full Stack Developer',
     description:
       'A training project for managing personal and team tasks. Built with TypeScript and React, the app supports creating tasks with deadlines, tracking progress, and sharing tasks with registered team members. Users can work without signing in (data stored locally) or register to sync data with MongoDB. Includes secure authentication and a flexible backend.',
-    code: '',
     frontendGitLink: 'https://github.com/ydovzhyk/notes-organizer',
     backendGitLink: 'https://github.com/ydovzhyk/notes-organizer-backend',
     demo: 'https://notes-organiser-yd.netlify.app/',
@@ -160,7 +152,6 @@ export const projectsData = [
     name: 'Slim Mom',
     shotName: 'Slim Mom',
     role: 'Full Stack Developer',
-    code: 'https://github.com/ydovzhyk/frontend-slimmom',
     description:
       'A calorie tracking app that helps users manage daily intake and monitor weight goals. Features registration, login, and personalized nutrition dashboards. Users can add custom food items alongside the standard database for more accurate diet tracking. Data is stored in a database, allowing easy access to progress. Built with a modular frontend and secure REST API backend.',
     tools: [
@@ -173,7 +164,6 @@ export const projectsData = [
       'MongoDB',
       'Swagger',
     ],
-    code: '',
     frontendGitLink: 'https://github.com/ydovzhyk/frontend-slimmom',
     backendGitLink: 'https://github.com/ydovzhyk/backend-slimmom',
     demo: 'https://ydovzhyk.github.io/frontend-slimmom/',
@@ -195,7 +185,6 @@ export const projectsData = [
       'MongoDB',
     ],
     role: 'Full Stack Developer',
-    code: '',
     frontendGitLink: 'https://github.com/ydovzhyk/frontend-kapusta-dev',
     backendGitLink: 'https://github.com/ydovzhyk/backend-kapusta-dev',
     demo: 'https://ydovzhyk.github.io/frontend-kapusta-dev/',
@@ -209,7 +198,6 @@ export const projectsData = [
     role: 'Frontend Developer / Team Lead',
     description:
       'A team project for discovering events around the world. Users can browse trending events with filters and dynamic search. I served as Team Lead, responsible for setting up the project template, GitHub repository, and organizing task distribution. Also contributed to the development of key features including the neon logo in the header, pagination, API integration, and the input search form. Focused on delivering a clean, responsive UI.',
-    code: '',
     frontendGitLink: 'https://github.com/ydovzhyk/eventbooster_team_project',
     backendGitLink: '',
     demo: 'https://ydovzhyk.github.io/eventbooster_team_project/',
