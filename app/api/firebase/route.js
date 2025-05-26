@@ -34,10 +34,15 @@ export async function POST(req) {
       model: 'gpt-4o-mini',
       messages: [systemPrompt, ...lastMessages],
       temperature: 0.7,
+      stream: true,
     })
 
-    const assistantReply =
-      completion.choices?.[0]?.message?.content || '🤖 No reply'
+    let assistantReply = ''
+
+    for await (const chunk of completion) {
+      const delta = chunk.choices?.[0]?.delta?.content
+      if (delta) assistantReply += delta
+    }
 
     await saveUrlsFromGptReply(assistantReply, userId)
 
