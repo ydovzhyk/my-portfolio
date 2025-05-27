@@ -113,6 +113,8 @@ const ChatWidget = () => {
     sourceNode,
   } = useAudioRecorder({})
 
+  const fallbackMessage = `⚠️ The response was too large and couldn't be delivered due to technical limitations. Please try asking a more specific or narrowly focused question.`
+
   const fetchUrls = async () => {
     try {
       const res = await fetch('/api/urls', {
@@ -236,7 +238,7 @@ const ChatWidget = () => {
         const updated = [...prev]
         updated[updated.length - 1] = {
           role: 'assistant',
-          text: data.reply || '🤖 Got your message!',
+          text: data.reply || fallbackMessage,
           timestamp: new Date(),
         }
         return updated
@@ -352,7 +354,7 @@ const ChatWidget = () => {
         const updated = [...prev]
         updated[updated.length - 1] = {
           role: 'assistant',
-          text: data.reply || '🤖 Got your message!',
+          text: data.reply || fallbackMessage,
           timestamp: new Date(),
         }
         return updated
