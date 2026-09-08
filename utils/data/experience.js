@@ -14,7 +14,7 @@ export const experiences = [
     company: 'Self-initiated Project',
     duration: 'sep 2024 – present',
     projects: ['SpeakFlow'],
-    links: ['https://speakflow.netlify.app/'],
+    links: ['https://speakflow.art/'],
     notReady: [''],
   },
   {
