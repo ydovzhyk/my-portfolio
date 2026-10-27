@@ -32,6 +32,7 @@ export const experiences = [
     company: 'Code and build something in everyday.',
     duration: 'feb 2023 - present',
     projects: [
+      'MyTube',
       'Booking Apartment',
       'Easy Shop',
       'Notes Organizer',
@@ -40,6 +41,7 @@ export const experiences = [
       'Event Booster',
     ],
     links: [
+      'https://mytube-two-phi.vercel.app/',
       'https://bookingapart.netlify.app/',
       'https://easy-shop-team.netlify.app/',
       'https://notes-organiser-yd.netlify.app/',

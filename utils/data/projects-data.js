@@ -37,6 +37,34 @@ export const projectsData = [
   },
   {
     id: 3,
+    name: 'MyTube',
+    shotName: 'MyTube',
+    tools: [
+      'Next.js',
+      'React',
+      'Redux Toolkit',
+      'Sass',
+      'Axios',
+      'React Hook Form',
+      'Node.js',
+      'Express',
+      'MongoDB',
+      'Firebase Storage',
+      'JWT',
+      'Google OAuth',
+      'OpenAI',
+      'ffmpeg',
+    ],
+    role: 'Full Stack Developer',
+    description:
+      'A YouTube-inspired full-stack video platform built as a personal project. The frontend covers home feed, search, subscriptions, watch page, channels, and playlists. Auth supports email/password and Google OAuth. The backend provides a REST API for videos, channels, comments, playlists, and subscriptions, with JWT cookie auth, Firebase Storage for media, ffmpeg-based video processing, and OpenAI-assisted playlist covers. Deployed on Vercel (frontend) and Heroku (API).',
+    frontendGitLink: 'https://github.com/ydovzhyk/mytube',
+    backendGitLink: 'https://github.com/ydovzhyk/mytube-backend',
+    demo: 'https://mytube-two-phi.vercel.app/',
+    ready: true,
+  },
+  {
+    id: 4,
     name: 'Art Studio Dental',
     shotName: 'Art Studio Dental',
     tools: ['React', 'Redux', 'Sass', 'React I18next', 'React Helmet'],
@@ -49,7 +77,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 4,
+    id: 5,
     name: 'Middle Way',
     shotName: 'Middle Way',
     tools: [
@@ -73,7 +101,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 5,
+    id: 6,
     name: 'Booking Apartment',
     shotName: 'Booking Apartment',
     tools: [
@@ -100,7 +128,7 @@ export const projectsData = [
     ready: false,
   },
   {
-    id: 6,
+    id: 7,
     name: 'Easy-Shop',
     shotName: 'Easy-Shop',
     tools: [
@@ -126,7 +154,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 7,
+    id: 8,
     name: 'Notes Organizer',
     shotName: 'Notes Organizer',
     tools: [
@@ -148,7 +176,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 8,
+    id: 9,
     name: 'Slim Mom',
     shotName: 'Slim Mom',
     role: 'Full Stack Developer',
@@ -170,7 +198,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 9,
+    id: 10,
     name: 'Kapu$ta',
     shotName: 'Kapu$ta',
     description:
@@ -191,7 +219,7 @@ export const projectsData = [
     ready: true,
   },
   {
-    id: 10,
+    id: 11,
     name: 'Event Booster',
     shotName: 'Event Booster',
     tools: ['HTML', 'SASS', 'JavaScript', 'REST API'],
